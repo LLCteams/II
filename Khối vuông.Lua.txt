@@ -11,22 +11,55 @@ local PlayerMouse = Player:GetMouse()
 local redzlib = {
 	Themes = {
 		Darker = {
-			["BackgroundImage"] = "rbxassetid://82670617579434"
+			["BackgroundImage"] = "rbxassetid://82670617579434",
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(25, 25, 25)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32, 32, 32)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 25, 25))
+			}),
+			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(88, 101, 242),
+			["Color Text"] = Color3.fromRGB(243, 243, 243),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
 		},
 		Dark = {
-			["BackgroundImage"] = "rbxassetid://82670617579434"
+			["BackgroundImage"] = "rbxassetid://82670617579434",
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 40, 40)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(47, 47, 47)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 40, 40))
+			}),
+			["Color Hub 2"] = Color3.fromRGB(45, 45, 45),
+			["Color Stroke"] = Color3.fromRGB(65, 65, 65),
+			["Color Theme"] = Color3.fromRGB(65, 150, 255),
+			["Color Text"] = Color3.fromRGB(245, 245, 245),
+			["Color Dark Text"] = Color3.fromRGB(190, 190, 190)
 		},
 		Purple = {
-			["BackgroundImage"] = "rbxassetid://82670617579434"
+			["BackgroundImage"] = "rbxassetid://82670617579434",
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27, 25, 30)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32, 32, 32)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27, 25, 30))
+			}),
+			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(179, 0, 255),
+			["Color Text"] = Color3.fromRGB(240, 240, 240),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
+			["Color Dark Purple"] = Color3.fromRGB(179, 0, 255),
+			["Color Hub 9"] = Color3.fromRGB(0, 0, 0),
+			["Color Dark Greem"] = Color3.fromRGB(43, 255, 0)
 		}
 	},
 	Info = {
-		Version = "1.1.0"
+		Version = "1.1.0" -- ditambahkan lagi
 	},
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "Darker" -- default langsung pakai Darker
+		Theme = "Purple"
 	},
 	Settings = {},
 	Connection = {},
@@ -865,18 +898,15 @@ local UIScale = ViewportSize.Y / 450
 local Settings = redzlib.Settings
 local Flags = redzlib.Flags
 
--- 🔥 Main Background Frame (fullscreen)
+-- 🔥 Main UI Frame
 local currentTheme = redzlib.Themes[redzlib.Save.Theme]
 
-local MainFrame = Instance.new("ImageLabel")
+local MainFrame = Instance.new("ImageLabel") -- ganti Frame → ImageLabel
 MainFrame.Size = UDim2.new(0, redzlib.Save.UISize[1], 0, redzlib.Save.UISize[2])
-MainFrame.Position = UDim2.new(0.5, -redzlib.Save.UISize[1]/2, 0.5, -redzlib.Save.UISize[2]/2)
 MainFrame.BackgroundTransparency = 1
 MainFrame.Image = currentTheme["BackgroundImage"] or ""
-MainFrame.ImageTransparency = 0
-MainFrame.ScaleType = Enum.ScaleType.Stretch
-MainFrame.ZIndex = 0
-MainFrame.Parent = Player:WaitForChild("PlayerGui")
+MainFrame.ScaleType = Enum.ScaleType.Crop
+MainFrame.Parent = CoreGui
 
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 450
