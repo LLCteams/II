@@ -901,12 +901,14 @@ local Flags = redzlib.Flags
 -- 🔥 Main UI Frame
 local currentTheme = redzlib.Themes[redzlib.Save.Theme]
 
-local MainFrame = Instance.new("ImageLabel") -- ganti Frame → ImageLabel
-MainFrame.Size = UDim2.new(0, redzlib.Save.UISize[1], 0, redzlib.Save.UISize[2])
+local MainFrame = Instance.new("ImageLabel")
+MainFrame.Size = UDim2.new(1, 0, 1, 0) -- isi layar
+MainFrame.Position = UDim2.new(0, 0, 0, 0)
 MainFrame.BackgroundTransparency = 1
-MainFrame.Image = currentTheme["BackgroundImage"] or ""
-MainFrame.ScaleType = Enum.ScaleType.Crop
-MainFrame.Parent = CoreGui
+MainFrame.Image = "rbxassetid://82670617579434" -- pastikan ini image/texture
+MainFrame.ImageTransparency = 0
+MainFrame.ScaleType = Enum.ScaleType.Stretch -- biar menyesuaikan
+MainFrame.Parent = Player:WaitForChild("PlayerGui")
 
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 450
