@@ -54,7 +54,7 @@ local redzlib = {
 		}
 	},
 	Info = {
-		Version = "1.1.0" -- ditambahkan lagi
+		Version = "1.1.0"
 	},
 	Save = {
 		UISize = {550, 380},
@@ -898,17 +898,37 @@ local UIScale = ViewportSize.Y / 450
 local Settings = redzlib.Settings
 local Flags = redzlib.Flags
 
--- 🔥 Main UI Frame
+-- 🔥 Main Background Frame (fullscreen)
 local currentTheme = redzlib.Themes[redzlib.Save.Theme]
 
 local MainFrame = Instance.new("ImageLabel")
-MainFrame.Size = UDim2.new(1, 0, 1, 0) -- isi layar
+MainFrame.Size = UDim2.new(1, 0, 1, 0) -- fullscreen background
 MainFrame.Position = UDim2.new(0, 0, 0, 0)
 MainFrame.BackgroundTransparency = 1
-MainFrame.Image = "rbxassetid://82670617579434" -- pastikan ini image/texture
+MainFrame.Image = currentTheme["BackgroundImage"] or ""
 MainFrame.ImageTransparency = 0
-MainFrame.ScaleType = Enum.ScaleType.Stretch -- biar menyesuaikan
+MainFrame.ScaleType = Enum.ScaleType.Stretch
+MainFrame.ZIndex = 0 -- paling belakang
 MainFrame.Parent = Player:WaitForChild("PlayerGui")
+
+-- 🔥 Contoh elemen UI di atas background
+local TabFrame = Instance.new("Frame")
+TabFrame.Size = UDim2.new(0, redzlib.Save.UISize[1], 0, redzlib.Save.UISize[2])
+TabFrame.Position = UDim2.new(0.5, -redzlib.Save.UISize[1]/2, 0.5, -redzlib.Save.UISize[2]/2)
+TabFrame.BackgroundColor3 = currentTheme["Color Hub 2"]
+TabFrame.BorderSizePixel = 0
+TabFrame.ZIndex = 1 -- di atas background
+TabFrame.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.BackgroundTransparency = 1
+Title.Text = "My UI Hub"
+Title.TextColor3 = currentTheme["Color Text"]
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 24
+Title.ZIndex = 2
+Title.Parent = TabFrame
 
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 450
