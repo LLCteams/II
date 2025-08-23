@@ -37,23 +37,49 @@ local redzlib = {
 			["Color Dark Text"] = Color3.fromRGB(190, 190, 190)
 		},
 		Purple = {
-["Color Hub 1"] = ColorSequence.new({
-    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(180, 0, 255)),  -- Purple
-    ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 0, 200)), -- Bright Pink
-    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(180, 0, 255))  -- Purple
-}),
-["Color Hub 2"] = Color3.fromRGB(90, 20, 100),
-["Color Stroke"] = Color3.fromRGB(200, 50, 220), -- Glow edge
-["Color Theme"] = Color3.fromRGB(255, 0, 220), -- Mix Purple-Pink Glow
-["Color Text"] = Color3.fromRGB(255, 240, 255), -- Soft white-pink text
-["Color Dark Text"] = Color3.fromRGB(200, 150, 220), -- Glow shade text
-["Color Dark Purple"] = Color3.fromRGB(200, 0, 255), -- Neon Purple
-["Color Hub 9"] = Color3.fromRGB(20, 0, 30),
-["Color Dark Greem"] = Color3.fromRGB(255, 0, 180) -- Ganti ke pink biar konsisten
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(180, 0, 255)),  -- Purple
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 170, 255)),  -- Blue
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 200))   -- Pink
+			}),
+			["Color Hub 2"] = Color3.fromRGB(90, 20, 100),
+			["Color Stroke"] = Color3.fromRGB(200, 50, 220),
+			["Color Theme"] = Color3.fromRGB(255, 0, 220),
+			["Color Text"] = Color3.fromRGB(255, 240, 255),
+			["Color Dark Text"] = Color3.fromRGB(200, 150, 220),
+			["Color Dark Purple"] = Color3.fromRGB(200, 0, 255),
+			["Color Hub 9"] = Color3.fromRGB(20, 0, 30),
+			["Color Dark Greem"] = Color3.fromRGB(0, 200, 255)
 		}
 	},
+
+	-- ✨ Tambahan efek neon text
+	ApplyNeonText = function(_, textLabel)
+		if textLabel:FindFirstChild("UIGradient") then return end
+		local gradient = Instance.new("UIGradient")
+		gradient.Color = ColorSequence.new({
+			ColorSequenceKeypoint.new(0.0, Color3.fromRGB(180, 0, 255)),  -- Purple
+			ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 170, 255)),  -- Blue
+			ColorSequenceKeypoint.new(1.0, Color3.fromRGB(255, 0, 200))   -- Pink
+		})
+		gradient.Parent = textLabel
+
+		task.spawn(function()
+			while task.wait() do
+				local tween = TweenService:Create(
+					gradient,
+					TweenInfo.new(6, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
+					{Offset = Vector2.new(1, 0)}
+				)
+				tween:Play()
+				tween.Completed:Wait()
+				gradient.Offset = Vector2.new(-1, 0)
+			end
+		end)
+	end,
+
 	Info = {
-		Version = "1.1.0" -- ditambahkan lagi
+		Version = "1.1.0"
 	},
 	Save = {
 		UISize = {550, 380},
