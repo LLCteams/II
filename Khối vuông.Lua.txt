@@ -78,7 +78,7 @@ local redzlib = {
 
     Info = {Version="1.2.0"},
     Save = {UISize={550,380}, TabSize=160, Theme="Purple"}
-            {
+    Icons = {
 			["accessibility"] = "rbxassetid://10709751939",
 			["activity"] = "rbxassetid://10709752035",
 			["airvent"] = "rbxassetid://10709752131",
@@ -907,10 +907,10 @@ local UIScale = ViewportSize.Y / 450
 local Settings = redzlib.Settings
 local Flags = redzlib.Flags
 
--- ðŸ”¥ Main UI Frame
+-- 🔥 Main UI Frame
 local currentTheme = redzlib.Themes[redzlib.Save.Theme]
 
-local MainFrame = Instance.new("ImageLabel") -- ganti Frame â†’ ImageLabel
+local MainFrame = Instance.new("ImageLabel") -- ganti Frame → ImageLabel
 MainFrame.Size = UDim2.new(0, redzlib.Save.UISize[1], 0, redzlib.Save.UISize[2])
 MainFrame.BackgroundTransparency = 1
 MainFrame.Image = currentTheme["BackgroundImage"] or ""
@@ -1651,16 +1651,16 @@ function Window:AddMinimizeButton(Configs)
 
 	local Stroke, Corner
 
-	-- Aplicar arredondamento mÃ­nimo
+	-- Aplicar arredondamento mínimo
 	if Configs.Corner then
 		Corner = Make("Corner", Button)
 		SetProps(Corner, Configs.Corner)
 	end
 
-	-- Aplicar borda invisÃ­vel
+	-- Aplicar borda invisível
 	if Configs.Stroke then
 		Stroke = Make("Stroke", Button)
-		SetProps(Stroke, Configs.Stroke) -- âœ… Corrigido para aplicar Stroke corretamente
+		SetProps(Stroke, Configs.Stroke) -- ✅ Corrigido para aplicar Stroke corretamente
 	end
 
 	SetProps(Button, Configs.Button)
