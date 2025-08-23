@@ -53,7 +53,7 @@ local redzlib = {
 		}
 	},
 
-	-- ✨ Tambahan efek neon text
+	-- ✨ Efek neon pada teks
 	ApplyNeonText = function(_, textLabel)
 		if textLabel:FindFirstChild("UIGradient") then return end
 		local gradient = Instance.new("UIGradient")
@@ -76,6 +76,40 @@ local redzlib = {
 				gradient.Offset = Vector2.new(-1, 0)
 			end
 		end)
+	end,
+
+	-- 🚀 Auto Apply ke satu Tab (Background + Text)
+	ApplyThemeToTab = function(self, tabFrame)
+		-- Background gradient bright
+		if not tabFrame:FindFirstChild("UIGradient") then
+			local gradient = Instance.new("UIGradient")
+			gradient.Color = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.0, Color3.fromRGB(0, 200, 255)),   -- Bright Blue
+				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(180, 0, 255)),   -- Bright Purple
+				ColorSequenceKeypoint.new(1.0, Color3.fromRGB(255, 120, 0))    -- Bright Orange
+			})
+			gradient.Parent = tabFrame
+
+			task.spawn(function()
+				while tabFrame and tabFrame.Parent do
+					local tween = TweenService:Create(
+						gradient,
+						TweenInfo.new(8, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
+						{Offset = Vector2.new(1, 0)}
+					)
+					tween:Play()
+					tween.Completed:Wait()
+					gradient.Offset = Vector2.new(-1, 0)
+				end
+			end)
+		end
+
+		-- Semua teks di tab jadi neon
+		for _, obj in ipairs(tabFrame:GetDescendants()) do
+			if obj:IsA("TextLabel") or obj:IsA("TextButton") then
+				self:ApplyNeonText(obj)
+			end
+		end
 	end,
 
 	Info = {
