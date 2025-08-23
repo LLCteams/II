@@ -37,20 +37,19 @@ local redzlib = {
 			["Color Dark Text"] = Color3.fromRGB(190, 190, 190)
 		},
 		Purple = {
-			["BackgroundImage"] = "rbxassetid://82670617579434",
-			["Color Hub 1"] = ColorSequence.new({
-             ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 20, 40)),
-             ColorSequenceKeypoint.new(0.50, Color3.fromRGB(90, 30, 60)),
-         ColorSequenceKeypoint.new(1.00, Color3.fromRGB(60, 20, 40))
-       }),
-          ["Color Hub 2"] = Color3.fromRGB(75, 25, 50),
-          ["Color Stroke"] = Color3.fromRGB(120, 40, 80),
-          ["Color Theme"] = Color3.fromRGB(255, 0, 180), -- Bright Pink
-          ["Color Text"] = Color3.fromRGB(240, 240, 240),
-          ["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
-          ["Color Dark Purple"] = Color3.fromRGB(255, 50, 200), -- diganti jadi bright pink
-          ["Color Hub 9"] = Color3.fromRGB(0, 0, 0),
-          ["Color Dark Greem"] = Color3.fromRGB(255, 100, 200) -- diubah biar ikut pink tone
+["Color Hub 1"] = ColorSequence.new({
+    ColorSequenceKeypoint.new(0.00, Color3.fromRGB(180, 0, 255)),  -- Purple
+    ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 0, 200)), -- Bright Pink
+    ColorSequenceKeypoint.new(1.00, Color3.fromRGB(180, 0, 255))  -- Purple
+}),
+["Color Hub 2"] = Color3.fromRGB(90, 20, 100),
+["Color Stroke"] = Color3.fromRGB(200, 50, 220), -- Glow edge
+["Color Theme"] = Color3.fromRGB(255, 0, 220), -- Mix Purple-Pink Glow
+["Color Text"] = Color3.fromRGB(255, 240, 255), -- Soft white-pink text
+["Color Dark Text"] = Color3.fromRGB(200, 150, 220), -- Glow shade text
+["Color Dark Purple"] = Color3.fromRGB(200, 0, 255), -- Neon Purple
+["Color Hub 9"] = Color3.fromRGB(20, 0, 30),
+["Color Dark Greem"] = Color3.fromRGB(255, 0, 180) -- Ganti ke pink biar konsisten
 		}
 	},
 	Info = {
