@@ -217,7 +217,7 @@ local redzlib = {
     end,
 
     Info = {Version="1.2.0"},
-    Save = {UISize={550,380}, TabSize=160, Theme="Purple"},
+    Save = {UISize={550,380}, TabSize=160, Theme="Sunset"},
     Icons = {
 			["accessibility"] = "rbxassetid://10709751939",
 			["activity"] = "rbxassetid://10709752035",
