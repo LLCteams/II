@@ -19,18 +19,21 @@ local redzlib = {
 				ColorSequenceKeypoint.new(0.80, Color3.fromRGB(128, 0, 255)),   -- purple neon
 				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))      -- red neon
 			}),
+
+			-- Warna utama UI
 			["Color Hub 2"] = Color3.fromRGB(0, 255, 255),
 			["Color Stroke"] = Color3.fromRGB(255, 255, 255),
 			["Color Theme"] = Color3.fromRGB(255, 0, 128),
 
-			-- teks neon glow
-			["Color Text"] = Color3.fromRGB(255, 255, 255),
-			["Color Dark Text"] = Color3.fromRGB(0, 255, 180),
-			["TextStrokeColor"] = Color3.fromRGB(255, 0, 255),
-			["TextStrokeTransparency"] = 0.25,
+			-- Teks neon glow (lebih kontras)
+			["Color Text"] = Color3.fromRGB(255, 255, 255), -- putih biar jelas
+			["Color Dark Text"] = Color3.fromRGB(0, 200, 255), -- biru neon kontras
+			["TextStrokeColor"] = Color3.fromRGB(0, 0, 0), -- hitam tipis biar teks tetap kebaca
+			["TextStrokeTransparency"] = 0.6, -- agak transparan supaya glow tetap ada
 
-			-- full transparan
-			["BackgroundTransparency"] = 1
+			-- Background transparan
+			["BackgroundColor"] = Color3.fromRGB(0, 0, 0), -- default hitam (tidak kelihatan karena transparan penuh)
+			["BackgroundTransparency"] = 1 -- benar-benar hilang
 		},
 	},
 	Info = {
