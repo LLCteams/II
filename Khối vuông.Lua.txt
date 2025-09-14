@@ -10,23 +10,36 @@ local PlayerMouse = Player:GetMouse()
 
 local redzlib = {
 	Themes = {
-		neon = {
+		neon_full = { -- full transparan
 			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 255, 255)),   -- cyan neon
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 0, 255)),   -- magenta neon
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 128))    -- green neon
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 128)),
+				ColorSequenceKeypoint.new(0.20, Color3.fromRGB(0, 255, 255)),
+				ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 128)),
+				ColorSequenceKeypoint.new(0.60, Color3.fromRGB(255, 255, 0)),
+				ColorSequenceKeypoint.new(0.80, Color3.fromRGB(128, 0, 255)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))
 			}),
-			["Color Hub 2"] = Color3.fromRGB(0, 255, 255),
-			["Color Stroke"] = Color3.fromRGB(255, 255, 255),
-			["Color Theme"] = Color3.fromRGB(255, 0, 255),
+			["Color Text"] = Color3.fromRGB(255, 255, 255),
+			["Color Dark Text"] = Color3.fromRGB(0, 255, 180),
+			["TextStrokeColor"] = Color3.fromRGB(255, 0, 255),
+			["TextStrokeTransparency"] = 0.25,
+			["BackgroundTransparency"] = 1 -- full transparan
+		},
 
-			-- teks neon glow
-			["Color Text"] = Color3.fromRGB(255, 255, 255),      -- teks utama putih terang
-			["Color Dark Text"] = Color3.fromRGB(0, 200, 255),   -- teks sekunder biru neon
-			["TextStrokeColor"] = Color3.fromRGB(255, 0, 255),   -- glow magenta neon
-			["TextStrokeTransparency"] = 0.5,                    -- stroke semi transparan
-
-			["BackgroundTransparency"] = 0.3
+		neon_blur = { -- setengah transparan + blur
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 128)),
+				ColorSequenceKeypoint.new(0.20, Color3.fromRGB(0, 255, 255)),
+				ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 128)),
+				ColorSequenceKeypoint.new(0.60, Color3.fromRGB(255, 255, 0)),
+				ColorSequenceKeypoint.new(0.80, Color3.fromRGB(128, 0, 255)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))
+			}),
+			["Color Text"] = Color3.fromRGB(255, 255, 255),
+			["Color Dark Text"] = Color3.fromRGB(0, 255, 180),
+			["TextStrokeColor"] = Color3.fromRGB(255, 0, 255),
+			["TextStrokeTransparency"] = 0.25,
+			["BackgroundTransparency"] = 0.4 -- setengah transparan
 		},
 	},
 	Info = {
@@ -1559,12 +1572,12 @@ function redzlib:MakeWindow(Configs)
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
 			Title = "Close",
-			Text = "Deseja Realmente Fecha o Script?",
+			Text = "Close UniX.launcher? this will close all features etc.",
 			Options = {
-				{"Confirm", function()
+				{"Destroy", function()
 					ScreenGui:Destroy()
 				end},
-				{"Cancel"}
+				{"Back"}
 			}
 		})
 	end
