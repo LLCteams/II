@@ -1,224 +1,51 @@
 local MarketplaceService = game:GetService("MarketplaceService")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
+local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
 local redzlib = {
-    Themes = {
-        Purple = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(180,0,255)),
-                ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,170,255)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(255,0,200))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(90,20,100),
-            ["Color Stroke"] = Color3.fromRGB(200,50,220),
-            ["Color Theme"] = Color3.fromRGB(255,0,220),
-            ["Color Text"] = Color3.fromRGB(255,240,255),
-        },
+	Themes = {
+		neon = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 255, 255)),   -- cyan neon
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 0, 255)),   -- magenta neon
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 128))    -- green neon
+			}),
+			["Color Hub 2"] = Color3.fromRGB(0, 255, 255),
+			["Color Stroke"] = Color3.fromRGB(255, 255, 255),
+			["Color Theme"] = Color3.fromRGB(255, 0, 255),
 
-        Galaxy = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(40,0,80)),
-                ColorSequenceKeypoint.new(0.5, Color3.fromRGB(120,0,180)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(0,120,255))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(20,10,40),
-            ["Color Stroke"] = Color3.fromRGB(200,150,255),
-            ["Color Theme"] = Color3.fromRGB(100,50,255),
-            ["Color Text"] = Color3.fromRGB(230,230,255),
-        },
+			-- teks neon glow
+			["Color Text"] = Color3.fromRGB(255, 255, 255),      -- teks utama putih terang
+			["Color Dark Text"] = Color3.fromRGB(0, 200, 255),   -- teks sekunder biru neon
+			["TextStrokeColor"] = Color3.fromRGB(255, 0, 255),   -- glow magenta neon
+			["TextStrokeTransparency"] = 0.5,                    -- stroke semi transparan
 
-        Fire = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,0)),
-                ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255,120,0)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(255,220,0))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(80,20,10),
-            ["Color Stroke"] = Color3.fromRGB(255,80,20),
-            ["Color Theme"] = Color3.fromRGB(255,100,0),
-            ["Color Text"] = Color3.fromRGB(255,240,200),
-        },
-
-        Ice = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(0,200,255)),
-                ColorSequenceKeypoint.new(0.5, Color3.fromRGB(120,240,255)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(200,255,255))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(20,50,80),
-            ["Color Stroke"] = Color3.fromRGB(150,220,255),
-            ["Color Theme"] = Color3.fromRGB(120,200,255),
-            ["Color Text"] = Color3.fromRGB(240,255,255),
-        },
-
-        Sunset = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(255,120,0)),
-                ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255,0,120)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(120,0,255))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(70,20,20),
-            ["Color Stroke"] = Color3.fromRGB(255,80,80),
-            ["Color Theme"] = Color3.fromRGB(255,100,50),
-            ["Color Text"] = Color3.fromRGB(255,230,200),
-        },
-
-        Emerald = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(0,255,120)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(0,120,80))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(10,40,20),
-            ["Color Stroke"] = Color3.fromRGB(0,200,120),
-            ["Color Theme"] = Color3.fromRGB(0,255,100),
-            ["Color Text"] = Color3.fromRGB(200,255,220),
-        },
-
-        Cyberpunk = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,150)),
-                ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,200)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(255,255,0))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(30,10,40),
-            ["Color Stroke"] = Color3.fromRGB(255,0,200),
-            ["Color Theme"] = Color3.fromRGB(0,255,180),
-            ["Color Text"] = Color3.fromRGB(255,255,200),
-        },
-
-        DarkVoid = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(10,10,10)),
-                ColorSequenceKeypoint.new(0.5, Color3.fromRGB(40,0,60)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(20,20,20),
-            ["Color Stroke"] = Color3.fromRGB(120,0,200),
-            ["Color Theme"] = Color3.fromRGB(80,0,120),
-            ["Color Text"] = Color3.fromRGB(200,200,200),
-        },
-
-        Rainbow = {
-            ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.fromRGB(255,0,0)),
-                ColorSequenceKeypoint.new(0.2, Color3.fromRGB(255,150,0)),
-                ColorSequenceKeypoint.new(0.4, Color3.fromRGB(255,255,0)),
-                ColorSequenceKeypoint.new(0.6, Color3.fromRGB(0,255,0)),
-                ColorSequenceKeypoint.new(0.8, Color3.fromRGB(0,0,255)),
-                ColorSequenceKeypoint.new(1, Color3.fromRGB(180,0,255))
-            }),
-            ["Color Hub 2"] = Color3.fromRGB(50,50,50),
-            ["Color Stroke"] = Color3.fromRGB(255,255,255),
-            ["Color Theme"] = Color3.fromRGB(255,100,200),
-            ["Color Text"] = Color3.fromRGB(255,255,255),
-        },
-    },
-
-    -- Rainbow text with neon
-    ApplyRainbowText = function(_, textLabel)
-        task.spawn(function()
-            while textLabel and textLabel.Parent do
-                local hue = tick()%1
-                textLabel.TextColor3 = Color3.fromHSV(hue,1,1)
-                task.wait(0.03)
-            end
-        end)
-    end,
-
-    -- Gradient background following mouse
-    ApplyMouseGradient = function(_, frame)
-        if frame:FindFirstChild("UIGradient") then return end
-        local gradient = Instance.new("UIGradient")
-        gradient.Color = ColorSequence.new({
-            ColorSequenceKeypoint.new(0,Color3.fromRGB(0,200,255)),
-            ColorSequenceKeypoint.new(0.5,Color3.fromRGB(180,0,255)),
-            ColorSequenceKeypoint.new(1,Color3.fromRGB(255,120,0))
-        })
-        gradient.Parent = frame
-
-        RunService.RenderStepped:Connect(function()
-            local mouseX = math.clamp(PlayerMouse.X/frame.AbsoluteSize.X,0,1)
-            local mouseY = math.clamp(PlayerMouse.Y/frame.AbsoluteSize.Y,0,1)
-            gradient.Offset = Vector2.new(mouseX*2-1, mouseY*2-1)
-        end)
-    end,
-
-    -- Neon + rainbow + hover glow
-    ApplyNeonText = function(_, textLabel)
-        if textLabel:FindFirstChild("UIGradient") then return end
-        local gradient = Instance.new("UIGradient")
-        gradient.Color = ColorSequence.new({
-            ColorSequenceKeypoint.new(0,Color3.fromRGB(180,0,255)),
-            ColorSequenceKeypoint.new(0.5,Color3.fromRGB(0,170,255)),
-            ColorSequenceKeypoint.new(1,Color3.fromRGB(255,0,200))
-        })
-        gradient.Parent = textLabel
-
-        local shadow = Instance.new("UIStroke")
-        shadow.Thickness = 2
-        shadow.Color = Color3.fromRGB(255,255,255)
-        shadow.Parent = textLabel
-
-        -- Hover glow
-        textLabel.MouseEnter:Connect(function()
-            TweenService:Create(textLabel,TweenInfo.new(0.2),{TextSize=textLabel.TextSize+2}):Play()
-        end)
-        textLabel.MouseLeave:Connect(function()
-            TweenService:Create(textLabel,TweenInfo.new(0.2),{TextSize=textLabel.TextSize-2}):Play()
-        end)
-    end,
-
-    -- Apply theme to tab
-    ApplyThemeToTab = function(self, tabFrame)
-        tabFrame.BackgroundTransparency = 1
-        self:ApplyMouseGradient(tabFrame)
-        for _, obj in ipairs(tabFrame:GetDescendants()) do
-            if obj:IsA("TextLabel") or obj:IsA("TextButton") then
-                self:ApplyNeonText(obj)
-                self:ApplyRainbowText(obj)
-            end
-        end
-        TweenService:Create(tabFrame, TweenInfo.new(0.5), {BackgroundTransparency=0}):Play()
-    end,
-
-    -- AUTO THEME CHANGER
-    AutoThemeChanger = function(self, tabFrame, delayTime, mode)
-        delayTime = delayTime or 5 -- detik
-        mode = mode or "random" -- "random" / "cycle"
-
-        task.spawn(function()
-            local themeNames = {}
-            for themeName,_ in pairs(self.Themes) do
-                table.insert(themeNames, themeName)
-            end
-            local index = 1
-
-            while tabFrame and tabFrame.Parent do
-                local selectedTheme
-                if mode == "random" then
-                    selectedTheme = themeNames[math.random(1, #themeNames)]
-                else -- cycle
-                    selectedTheme = themeNames[index]
-                    index = index + 1
-                    if index > #themeNames then index = 1 end
-                end
-
-                print("[ThemeChanger] Switched to:", selectedTheme)
-                self:ApplyThemeToTab(tabFrame)
-
-                task.wait(delayTime)
-            end
-        end)
-    end,
-
-    Info = {Version="1.2.0"},
-    Save = {UISize={550,380}, TabSize=160, Theme="Sunset"},
-    Icons = {
+			["BackgroundTransparency"] = 0.3
+		},
+	},
+	Info = {
+		Version = "1.1.0"
+	},
+	Save = {
+		UISize = {550, 380},
+		TabSize = 160,
+		Theme = "neon"
+	},
+	Settings = {},
+	Connection = {},
+	Instances = {},
+	Elements = {},
+	Options = {},
+	Flags = {},
+	Tabs = {},
+	Icons = (function()
+		return {
 			["accessibility"] = "rbxassetid://10709751939",
 			["activity"] = "rbxassetid://10709752035",
 			["airvent"] = "rbxassetid://10709752131",
@@ -1047,22 +874,6 @@ local UIScale = ViewportSize.Y / 450
 local Settings = redzlib.Settings
 local Flags = redzlib.Flags
 
--- 🔥 Main UI Frame
-local currentTheme = redzlib.Themes[redzlib.Save.Theme]
-
-local MainFrame = Instance.new("ImageLabel") -- ganti Frame → ImageLabel
-MainFrame.Size = UDim2.new(0, redzlib.Save.UISize[1], 0, redzlib.Save.UISize[2])
-MainFrame.BackgroundTransparency = 1
-MainFrame.Image = currentTheme["BackgroundImage"] or ""
-MainFrame.ScaleType = Enum.ScaleType.Crop
-MainFrame.Parent = CoreGui
-
-local ViewportSize = workspace.CurrentCamera.ViewportSize
-local UIScale = ViewportSize.Y / 450
-
-local Settings = redzlib.Settings
-local Flags = redzlib.Flags
-
 local SetProps, SetChildren, InsertTheme, Create do
 	InsertTheme = function(Instance, Type)
 		table.insert(redzlib.Instances, {
@@ -1121,7 +932,7 @@ local SetProps, SetChildren, InsertTheme, Create do
 		end
 	end
 	
-	pcall(Save, "AL Community.json")
+	pcall(Save, "redz library V5.json")
 end
 
 local Funcs = {} do
@@ -1263,7 +1074,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "AL Community",
+	Name = "redz Library V5",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -1539,7 +1350,7 @@ function redzlib:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
 	redzlib.Save.Theme = NewTheme
-	SaveJson("AL Community.json", redzlib.Save)
+	SaveJson("redz library V5.json", redzlib.Save)
 	Theme = redzlib.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
@@ -1568,7 +1379,7 @@ function redzlib:SetScale(NewScale)
 end
 
 function redzlib:MakeWindow(Configs)
-	local WTitle = Configs[1] or Configs.Name or Configs.Title or "AL Community"
+	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
 	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
 	
 	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
@@ -1709,13 +1520,13 @@ function redzlib:MakeWindow(Configs)
 	ConnectSave(ControlSize1, function()
 		if not Minimized then
 			redzlib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
-			SaveJson("AL Community.json", redzlib.Save)
+			SaveJson("redz library V5.json", redzlib.Save)
 		end
 	end)
 	
 	ConnectSave(ControlSize2, function()
 		redzlib.Save.TabSize = MainScroll.Size.X.Offset
-		SaveJson("AL Community.json", redzlib.Save)
+		SaveJson("redz library V5.json", redzlib.Save)
 	end)
 	
 	local ButtonsFolder = Create("Folder", TopBar, {
@@ -1748,12 +1559,12 @@ function redzlib:MakeWindow(Configs)
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
 			Title = "Close",
-			Text = "Exit from exe.UniverseX ?",
+			Text = "Close UniX.launcher? this will close all features etc.",
 			Options = {
-				{"Confirm", function()
+				{"Destroy", function()
 					ScreenGui:Destroy()
 				end},
-				{"Cancel"}
+				{"Back"}
 			}
 		})
 	end
