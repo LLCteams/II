@@ -10,115 +10,32 @@ local PlayerMouse = Player:GetMouse()
 
 local redzlib = {
 	Themes = {
-		Darker = {
-			["BackgroundImage"] = "rbxassetid://82670617579434",
+		neon = {
 			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(25, 25, 25)),
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32, 32, 32)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 25, 25))
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 255, 255)),   -- cyan neon
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 0, 255)),   -- magenta neon
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 128))    -- green neon
 			}),
-			["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
-			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(88, 101, 242),
-			["Color Text"] = Color3.fromRGB(243, 243, 243),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
+			["Color Hub 2"] = Color3.fromRGB(0, 255, 255),
+			["Color Stroke"] = Color3.fromRGB(255, 255, 255),
+			["Color Theme"] = Color3.fromRGB(255, 0, 255),
+
+			-- teks neon glow
+			["Color Text"] = Color3.fromRGB(255, 255, 255),      -- teks utama putih terang
+			["Color Dark Text"] = Color3.fromRGB(0, 200, 255),   -- teks sekunder biru neon
+			["TextStrokeColor"] = Color3.fromRGB(255, 0, 255),   -- glow magenta neon
+			["TextStrokeTransparency"] = 0.5,                    -- stroke semi transparan
+
+			["BackgroundTransparency"] = 0.3
 		},
-		Dark = {
-			["BackgroundImage"] = "rbxassetid://82670617579434",
-			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 40, 40)),
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(47, 47, 47)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 40, 40))
-			}),
-			["Color Hub 2"] = Color3.fromRGB(45, 45, 45),
-			["Color Stroke"] = Color3.fromRGB(65, 65, 65),
-			["Color Theme"] = Color3.fromRGB(65, 150, 255),
-			["Color Text"] = Color3.fromRGB(245, 245, 245),
-			["Color Dark Text"] = Color3.fromRGB(190, 190, 190)
-		},
-		Purple = {
-			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(180, 0, 255)),  -- Purple
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 170, 255)),  -- Blue
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 200))   -- Pink
-			}),
-			["Color Hub 2"] = Color3.fromRGB(90, 20, 100),
-			["Color Stroke"] = Color3.fromRGB(200, 50, 220),
-			["Color Theme"] = Color3.fromRGB(255, 0, 220),
-			["Color Text"] = Color3.fromRGB(255, 240, 255),
-			["Color Dark Text"] = Color3.fromRGB(200, 150, 220),
-			["Color Dark Purple"] = Color3.fromRGB(200, 0, 255),
-			["Color Hub 9"] = Color3.fromRGB(20, 0, 30),
-			["Color Dark Greem"] = Color3.fromRGB(0, 200, 255)
-		}
 	},
-
-	-- ✨ Efek neon pada teks
-	ApplyNeonText = function(_, textLabel)
-		if textLabel:FindFirstChild("UIGradient") then return end
-		local gradient = Instance.new("UIGradient")
-		gradient.Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0.0, Color3.fromRGB(180, 0, 255)),  -- Purple
-			ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 170, 255)),  -- Blue
-			ColorSequenceKeypoint.new(1.0, Color3.fromRGB(255, 0, 200))   -- Pink
-		})
-		gradient.Parent = textLabel
-
-		task.spawn(function()
-			while task.wait() do
-				local tween = TweenService:Create(
-					gradient,
-					TweenInfo.new(6, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
-					{Offset = Vector2.new(1, 0)}
-				)
-				tween:Play()
-				tween.Completed:Wait()
-				gradient.Offset = Vector2.new(-1, 0)
-			end
-		end)
-	end,
-
-	-- 🚀 Auto Apply ke satu Tab (Background + Text)
-	ApplyThemeToTab = function(self, tabFrame)
-		-- Background gradient bright
-		if not tabFrame:FindFirstChild("UIGradient") then
-			local gradient = Instance.new("UIGradient")
-			gradient.Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.0, Color3.fromRGB(0, 200, 255)),   -- Bright Blue
-				ColorSequenceKeypoint.new(0.5, Color3.fromRGB(180, 0, 255)),   -- Bright Purple
-				ColorSequenceKeypoint.new(1.0, Color3.fromRGB(255, 120, 0))    -- Bright Orange
-			})
-			gradient.Parent = tabFrame
-
-			task.spawn(function()
-				while tabFrame and tabFrame.Parent do
-					local tween = TweenService:Create(
-						gradient,
-						TweenInfo.new(8, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut),
-						{Offset = Vector2.new(1, 0)}
-					)
-					tween:Play()
-					tween.Completed:Wait()
-					gradient.Offset = Vector2.new(-1, 0)
-				end
-			end)
-		end
-
-		-- Semua teks di tab jadi neon
-		for _, obj in ipairs(tabFrame:GetDescendants()) do
-			if obj:IsA("TextLabel") or obj:IsA("TextButton") then
-				self:ApplyNeonText(obj)
-			end
-		end
-	end,
-
 	Info = {
 		Version = "1.1.0"
 	},
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "Purple"
+		Theme = "neon"
 	},
 	Settings = {},
 	Connection = {},
@@ -957,22 +874,6 @@ local UIScale = ViewportSize.Y / 450
 local Settings = redzlib.Settings
 local Flags = redzlib.Flags
 
--- 🔥 Main UI Frame
-local currentTheme = redzlib.Themes[redzlib.Save.Theme]
-
-local MainFrame = Instance.new("ImageLabel") -- ganti Frame → ImageLabel
-MainFrame.Size = UDim2.new(0, redzlib.Save.UISize[1], 0, redzlib.Save.UISize[2])
-MainFrame.BackgroundTransparency = 1
-MainFrame.Image = currentTheme["BackgroundImage"] or ""
-MainFrame.ScaleType = Enum.ScaleType.Crop
-MainFrame.Parent = CoreGui
-
-local ViewportSize = workspace.CurrentCamera.ViewportSize
-local UIScale = ViewportSize.Y / 450
-
-local Settings = redzlib.Settings
-local Flags = redzlib.Flags
-
 local SetProps, SetChildren, InsertTheme, Create do
 	InsertTheme = function(Instance, Type)
 		table.insert(redzlib.Instances, {
@@ -1031,7 +932,7 @@ local SetProps, SetChildren, InsertTheme, Create do
 		end
 	end
 	
-	pcall(Save, "AL Community.json")
+	pcall(Save, "redz library V5.json")
 end
 
 local Funcs = {} do
@@ -1173,7 +1074,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "AL Community",
+	Name = "redz Library V5",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -1449,7 +1350,7 @@ function redzlib:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
 	redzlib.Save.Theme = NewTheme
-	SaveJson("AL Community.json", redzlib.Save)
+	SaveJson("redz library V5.json", redzlib.Save)
 	Theme = redzlib.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
@@ -1478,7 +1379,7 @@ function redzlib:SetScale(NewScale)
 end
 
 function redzlib:MakeWindow(Configs)
-	local WTitle = Configs[1] or Configs.Name or Configs.Title or "AL Community"
+	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
 	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
 	
 	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
@@ -1619,13 +1520,13 @@ function redzlib:MakeWindow(Configs)
 	ConnectSave(ControlSize1, function()
 		if not Minimized then
 			redzlib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
-			SaveJson("AL Community.json", redzlib.Save)
+			SaveJson("redz library V5.json", redzlib.Save)
 		end
 	end)
 	
 	ConnectSave(ControlSize2, function()
 		redzlib.Save.TabSize = MainScroll.Size.X.Offset
-		SaveJson("AL Community.json", redzlib.Save)
+		SaveJson("redz library V5.json", redzlib.Save)
 	end)
 	
 	local ButtonsFolder = Create("Folder", TopBar, {
@@ -1658,7 +1559,7 @@ function redzlib:MakeWindow(Configs)
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
 			Title = "Close",
-			Text = "Exit from exe.UniverseX ?",
+			Text = "Deseja Realmente Fecha o Script?",
 			Options = {
 				{"Confirm", function()
 					ScreenGui:Destroy()
