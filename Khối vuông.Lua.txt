@@ -11,29 +11,24 @@ local PlayerMouse = Player:GetMouse()
 local redzlib = {
 	Themes = {
 		neon = {
+			-- Warna bagian UI
 			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 128)),   -- pink neon
-				ColorSequenceKeypoint.new(0.20, Color3.fromRGB(0, 255, 255)),   -- cyan neon
-				ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 128)),   -- green neon
-				ColorSequenceKeypoint.new(0.60, Color3.fromRGB(255, 255, 0)),   -- yellow neon
-				ColorSequenceKeypoint.new(0.80, Color3.fromRGB(128, 0, 255)),   -- purple neon
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 0))      -- red neon
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))
 			}),
+			["Color Hub 2"] = Color3.fromRGB(0, 0, 0),
+			["Color Stroke"] = Color3.fromRGB(0, 0, 0),
+			["Color Theme"] = Color3.fromRGB(0, 0, 0),
 
-			-- Warna utama UI
-			["Color Hub 2"] = Color3.fromRGB(0, 255, 255),
-			["Color Stroke"] = Color3.fromRGB(255, 255, 255),
-			["Color Theme"] = Color3.fromRGB(255, 0, 128),
+			-- Warna teks (ungu + glow)
+			["Color Text"] = Color3.fromRGB(170, 0, 255), -- ungu neon
+			["Color Dark Text"] = Color3.fromRGB(140, 0, 200), -- variasi ungu lebih gelap
+			["TextStrokeColor"] = Color3.fromRGB(255, 0, 255), -- pink ungu glow
+			["TextStrokeTransparency"] = 0.25, -- biar glow kelihatan
 
-			-- Teks neon glow (lebih kontras)
-			["Color Text"] = Color3.fromRGB(255, 255, 255), -- putih biar jelas
-			["Color Dark Text"] = Color3.fromRGB(0, 200, 255), -- biru neon kontras
-			["TextStrokeColor"] = Color3.fromRGB(0, 0, 0), -- hitam tipis biar teks tetap kebaca
-			["TextStrokeTransparency"] = 0.6, -- agak transparan supaya glow tetap ada
-
-			-- Background transparan
-			["BackgroundColor"] = Color3.fromRGB(0, 0, 0), -- default hitam (tidak kelihatan karena transparan penuh)
-			["BackgroundTransparency"] = 1 -- benar-benar hilang
+			-- Background transparan penuh
+			["BackgroundColor"] = Color3.fromRGB(0, 0, 0),
+			["BackgroundTransparency"] = 1
 		},
 	},
 	Info = {
