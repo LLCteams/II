@@ -10,25 +10,20 @@ local PlayerMouse = Player:GetMouse()
 
 local redzlib = {
 	Themes = {
-		neon = {
-			-- Warna bagian UI
+		sla = {
 			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(85, 0, 130)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 0)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(45, 0, 90))
 			}),
-			["Color Hub 2"] = Color3.fromRGB(0, 0, 0),
-			["Color Stroke"] = Color3.fromRGB(0, 0, 0),
-			["Color Theme"] = Color3.fromRGB(0, 0, 0),
-
-			-- Warna teks (ungu + glow)
-			["Color Text"] = Color3.fromRGB(170, 0, 255), -- ungu neon
-			["Color Dark Text"] = Color3.fromRGB(140, 0, 200), -- variasi ungu lebih gelap
-			["TextStrokeColor"] = Color3.fromRGB(255, 0, 255), -- pink ungu glow
-			["TextStrokeTransparency"] = 0.25, -- biar glow kelihatan
-
-			-- Background transparan penuh
+			["Color Hub 2"] = Color3.fromRGB(85, 0, 130),
+			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+			["Color Theme"] = Color3.fromRGB(85, 0, 130),
+			["Color Text"] = Color3.fromRGB(243, 243, 243),
+			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
+			
 			["BackgroundColor"] = Color3.fromRGB(0, 0, 0),
-			["BackgroundTransparency"] = 1
+			["BackgroundTransparency"] = 0.5
 		},
 	},
 	Info = {
@@ -37,7 +32,7 @@ local redzlib = {
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "neon"
+		Theme = "sla"
 	},
 	Settings = {},
 	Connection = {},
@@ -934,7 +929,7 @@ local SetProps, SetChildren, InsertTheme, Create do
 		end
 	end
 	
-	pcall(Save, "redz library V5.json")
+	pcall(Save, "UX LIB V2.json")
 end
 
 local Funcs = {} do
@@ -1076,7 +1071,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "redz Library V5",
+	Name = "UX LIB V2",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -1352,7 +1347,7 @@ function redzlib:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
 	redzlib.Save.Theme = NewTheme
-	SaveJson("redz library V5.json", redzlib.Save)
+	SaveJson("UX LIB V2.json", redzlib.Save)
 	Theme = redzlib.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
@@ -1381,7 +1376,7 @@ function redzlib:SetScale(NewScale)
 end
 
 function redzlib:MakeWindow(Configs)
-	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
+	local WTitle = Configs[1] or Configs.Name or Configs.Title or "UX LIB V2"
 	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
 	
 	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
@@ -1522,13 +1517,13 @@ function redzlib:MakeWindow(Configs)
 	ConnectSave(ControlSize1, function()
 		if not Minimized then
 			redzlib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
-			SaveJson("redz library V5.json", redzlib.Save)
+			SaveJson("UX LIB V2.json", redzlib.Save)
 		end
 	end)
 	
 	ConnectSave(ControlSize2, function()
 		redzlib.Save.TabSize = MainScroll.Size.X.Offset
-		SaveJson("redz library V5.json", redzlib.Save)
+		SaveJson("UX LIB V2.json", redzlib.Save)
 	end)
 	
 	local ButtonsFolder = Create("Folder", TopBar, {
@@ -1560,10 +1555,10 @@ function redzlib:MakeWindow(Configs)
 	local Window, FirstTab = {}, false
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
-			Title = "Close",
-			Text = "Close UniX.launcher? this will close all features etc.",
+			Title = "UniX.launcher",
+			Text = "Disable all UniX.launcher?\nthis will disable all important features from Local",
 			Options = {
-				{"Destroy", function()
+				{"Disable", function()
 					ScreenGui:Destroy()
 				end},
 				{"Back"}
