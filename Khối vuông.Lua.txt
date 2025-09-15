@@ -21,9 +21,6 @@ local redzlib = {
 			["Color Theme"] = Color3.fromRGB(85, 0, 130),
 			["Color Text"] = Color3.fromRGB(243, 243, 243),
 			["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
-			
-			["BackgroundColor"] = Color3.fromRGB(0, 0, 0),
-			["BackgroundTransparency"] = 0.5
 		},
 	},
 	Info = {
