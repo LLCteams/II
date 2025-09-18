@@ -1556,8 +1556,8 @@ function redzlib:MakeWindow(Configs)
 	local Window, FirstTab = {}, false
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
-			Title = "Close",
-			Text = "You Want Close Ui?",
+			Title = "UniX.launcher",
+			Text = "Disable features from UniX.launcher?",
 			Options = {
 				{"Confirm", function()
 					ScreenGui:Destroy()
