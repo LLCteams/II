@@ -1,92 +1,126 @@
---// Example of Professional UI Library
+--// Smooth Professional UI Library
+local TweenService = game:GetService("TweenService")
+
 local Library = {}
 Library.__index = Library
 
-local TweenService = game:GetService("TweenService")
+-- THEME
+Library.Theme = {
+    Background = Color3.fromRGB(25, 25, 35),
+    Accent     = Color3.fromRGB(120, 60, 200),
+    Text       = Color3.fromRGB(255, 255, 255),
+    Secondary  = Color3.fromRGB(45, 45, 60)
+}
 
-function Library:CreateWindow(config)
+-- CREATE WINDOW
+function Library:CreateWindow(title)
     local Window = {}
-    Window.Title = config.Title or "My UI"
-    Window.Size = config.Size or UDim2.new(0, 500, 0, 350)
+    
+    local ScreenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
+    ScreenGui.Name = "UnixUI"
 
-    -- Main ScreenGui
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Name = "CustomUILib"
-    ScreenGui.ResetOnSpawn = false
-    ScreenGui.Parent = game:GetService("CoreGui")
-
-    -- Main Frame
-    local Main = Instance.new("Frame")
-    Main.Name = "Main"
-    Main.Size = Window.Size
-    Main.Position = UDim2.new(0.5, -Window.Size.X.Offset/2, 0.5, -Window.Size.Y.Offset/2)
-    Main.BackgroundColor3 = Color3.fromRGB(30, 10, 60)
+    local Main = Instance.new("Frame", ScreenGui)
+    Main.Size = UDim2.new(0, 560, 0, 350)
+    Main.Position = UDim2.new(0.5, -280, 0.5, -175)
+    Main.BackgroundColor3 = self.Theme.Background
     Main.BorderSizePixel = 0
     Main.Active = true
     Main.Draggable = true
-    Main.Parent = ScreenGui
 
-    -- Title Bar
-    local Title = Instance.new("TextLabel")
-    Title.Size = UDim2.new(1, 0, 0, 30)
-    Title.BackgroundColor3 = Color3.fromRGB(50, 20, 100)
-    Title.Text = Window.Title
-    Title.Font = Enum.Font.GothamBold
-    Title.TextSize = 16
-    Title.TextColor3 = Color3.fromRGB(255,255,255)
-    Title.Parent = Main
+    local UICorner = Instance.new("UICorner", Main)
+    UICorner.CornerRadius = UDim.new(0, 12)
+
+    -- Title
+    local TitleBar = Instance.new("TextLabel", Main)
+    TitleBar.Size = UDim2.new(1, 0, 0, 32)
+    TitleBar.BackgroundColor3 = self.Theme.Secondary
+    TitleBar.Text = title or "Unix UI"
+    TitleBar.Font = Enum.Font.GothamBold
+    TitleBar.TextColor3 = self.Theme.Text
+    TitleBar.TextSize = 15
 
     -- Tabs Holder
-    local Tabs = Instance.new("Frame")
-    Tabs.Size = UDim2.new(0, 120, 1, -30)
-    Tabs.Position = UDim2.new(0, 0, 0, 30)
-    Tabs.BackgroundColor3 = Color3.fromRGB(40, 15, 80)
-    Tabs.Parent = Main
+    local Tabs = Instance.new("Frame", Main)
+    Tabs.Size = UDim2.new(0, 120, 1, -32)
+    Tabs.Position = UDim2.new(0, 0, 0, 32)
+    Tabs.BackgroundColor3 = self.Theme.Secondary
 
-    local TabButtons = Instance.new("UIListLayout")
-    TabButtons.FillDirection = Enum.FillDirection.Vertical
-    TabButtons.Padding = UDim.new(0, 6)
-    TabButtons.Parent = Tabs
+    local TabList = Instance.new("UIListLayout", Tabs)
+    TabList.SortOrder = Enum.SortOrder.LayoutOrder
+    TabList.Padding = UDim.new(0, 5)
 
     -- Content Holder
-    local Content = Instance.new("Frame")
-    Content.Size = UDim2.new(1, -120, 1, -30)
-    Content.Position = UDim2.new(0, 120, 0, 30)
-    Content.BackgroundColor3 = Color3.fromRGB(20, 5, 40)
-    Content.Parent = Main
+    local Content = Instance.new("Frame", Main)
+    Content.Size = UDim2.new(1, -120, 1, -32)
+    Content.Position = UDim2.new(0, 120, 0, 32)
+    Content.BackgroundTransparency = 1
 
-    Window.Main = Main
-    Window.Tabs = Tabs
     Window.Content = Content
+    Window.Tabs = Tabs
+    Window.Main = Main
 
     return setmetatable(Window, Library)
 end
 
+-- CREATE TAB
 function Library:CreateTab(name)
     local Tab = {}
-
-    local Button = Instance.new("TextButton")
-    Button.Text = name
+    
+    local Button = Instance.new("TextButton", self.Tabs)
     Button.Size = UDim2.new(1, -10, 0, 28)
-    Button.BackgroundColor3 = Color3.fromRGB(80, 30, 130)
-    Button.TextColor3 = Color3.new(1,1,1)
-    Button.Parent = self.Tabs
+    Button.Text = name
+    Button.BackgroundColor3 = self.Theme.Accent
+    Button.Font = Enum.Font.Gotham
+    Button.TextColor3 = self.Theme.Text
+    Button.TextSize = 14
+    Button.AutoButtonColor = false
+    
+    local UICorner = Instance.new("UICorner", Button)
+    UICorner.CornerRadius = UDim.new(0, 6)
 
-    local Page = Instance.new("Frame")
-    Page.Size = UDim2.new(1, 0, 1, 0)
-    Page.BackgroundTransparency = 1
+    local Page = Instance.new("ScrollingFrame", self.Content)
     Page.Visible = false
-    Page.Parent = self.Content
+    Page.Size = UDim2.new(1, 0, 1, 0)
+    Page.CanvasSize = UDim2.new(0, 0, 0, 0)
+    Page.BackgroundTransparency = 1
 
     Button.MouseButton1Click:Connect(function()
         for _,child in ipairs(self.Content:GetChildren()) do
-            if child:IsA("Frame") then child.Visible = false end
+            if child:IsA("ScrollingFrame") then
+                child.Visible = false
+            end
         end
         Page.Visible = true
     end)
 
     Tab.Page = Page
     return Tab
+end
+
+-- ADD BUTTON
+function Library:AddButton(tab, text, callback)
+    local Btn = Instance.new("TextButton", tab.Page)
+    Btn.Size = UDim2.new(0, 200, 0, 32)
+    Btn.Text = text
+    Btn.BackgroundColor3 = self.Theme.Secondary
+    Btn.Font = Enum.Font.Gotham
+    Btn.TextColor3 = self.Theme.Text
+    Btn.TextSize = 14
+
+    local UICorner = Instance.new("UICorner", Btn)
+    UICorner.CornerRadius = UDim.new(0, 6)
+
+    Btn.MouseEnter:Connect(function()
+        TweenService:Create(Btn, TweenInfo.new(0.2), {BackgroundColor3 = self.Theme.Accent}):Play()
+    end)
+
+    Btn.MouseLeave:Connect(function()
+        TweenService:Create(Btn, TweenInfo.new(0.2), {BackgroundColor3 = self.Theme.Secondary}):Play()
+    end)
+
+    Btn.MouseButton1Click:Connect(function()
+        pcall(callback)
+    end)
 end
 
 return Library
