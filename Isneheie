@@ -2,10 +2,10 @@
 
 local IceHub = {}
 local Options = {
-    BrookhavenTitle = "Titulo",
+    BrookhavenTitle = "RainV",
     TitleColor = Color3.fromRGB(0, 255, 255),
     LabelColor = Color3.fromRGB(255, 255, 255),
-    Owners = {"Vercel"},
+    Owners = {"Vercel Intertainments"},
     Discord1 = "https://discord.gg/example1",
     Discord2 = "https://discord.gg/example2"
 }
@@ -100,6 +100,28 @@ function IceHub.CreateMain()
 
 	Library.Name = "Library"
 	Library.Parent = game.CoreGui
+
+-- === Fullscreen Background + Credits ===
+local Background = Instance.new("ImageLabel")
+Background.Name = "Background"
+Background.Parent = Library
+Background.Size = UDim2.new(1, 0, 1, 0)
+Background.Position = UDim2.new(0, 0, 0, 0)
+Background.ZIndex = 0 -- stays behind everything
+Background.Image = "rbxassetid://134024520329952" -- << replace with your background image ID
+Background.ScaleType = Enum.ScaleType.Stretch
+
+local Credits = Instance.new("TextLabel")
+Credits.Name = "Credits"
+Credits.Parent = Library
+Credits.Size = UDim2.new(0, 400, 0, 35)
+Credits.Position = UDim2.new(0.5, -200, 0.95, 0)
+Credits.BackgroundTransparency = 1
+Credits.TextScaled = true
+Credits.ZIndex = 9999
+Credits.Text = "Owner is Vercel Intertainments"
+Credits.TextColor3 = Color3.fromRGB(255, 255, 255)
+Credits.Font = Enum.Font.GothamBold
 	Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 	MainFrame.Name = "MainFrame"
