@@ -202,7 +202,7 @@ UIBackground.ScaleType = Enum.ScaleType.Stretch
 	NameLabel.Position = UDim2.new(0.375201404, 0, 0.000481928233, 0)
 	NameLabel.Size = UDim2.new(0, 180, 0, 27)
 	NameLabel.Font = Enum.Font.SourceSans
-	NameLabel.Text = "Nome"
+	NameLabel.Text = "UX team"
 	NameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 	NameLabel.TextSize = 14.000
 
@@ -227,7 +227,7 @@ UIBackground.ScaleType = Enum.ScaleType.Stretch
 	Discord.Size = UDim2.new(0, 180, 0, 27)
 	Discord.AutoButtonColor = false
 	Discord.Font = Enum.Font.SourceSans
-	Discord.Text = "https://discord.gg/"
+	Discord.Text = "https://discord.gg/jw3Ur4jd7M"
 	Discord.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Discord.TextSize = 14.000
 
@@ -274,7 +274,7 @@ NillestImage2.Name = "NillestImage"
 	FlingAll.Size = UDim2.new(0, 180, 0, 27)
 	FlingAll.AutoButtonColor = false
 	FlingAll.Font = Enum.Font.SourceSans
-	FlingAll.Text = "Original Ui : IceHub"
+	FlingAll.Text = "RainV : v1.5"
 	FlingAll.TextColor3 = Color3.fromRGB(255, 255, 255)
 	FlingAll.TextSize = 14.000
 
@@ -287,7 +287,7 @@ NillestImage2.Name = "NillestImage"
 	TextLabel.Position = UDim2.new(0.540268481, 0, 0.01060241, 0)
 	TextLabel.Size = UDim2.new(0, 80, 0, 10)
 	TextLabel.Font = Enum.Font.SourceSans
-	TextLabel.Text = "Creator"
+	TextLabel.Text = "Developer"
 	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TextLabel.TextSize = 14.000
 
@@ -322,7 +322,7 @@ NillestImage2.Name = "NillestImage"
 	IcyDiscord.Position = UDim2.new(0.506711423, 0, 0.0175903663, 0)
 	IcyDiscord.Size = UDim2.new(0, 100, 0, 15)
 	IcyDiscord.Font = Enum.Font.SourceSans
-	IcyDiscord.Text = "Discord : @davi999"
+	IcyDiscord.Text = "Vercel Int"
 	IcyDiscord.TextColor3 = Color3.fromRGB(255, 255, 255)
 	IcyDiscord.TextSize = 14.000
 	IcyDiscord.TextXAlignment = Enum.TextXAlignment.Left
