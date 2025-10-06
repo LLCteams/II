@@ -240,7 +240,7 @@ UIBackground.ScaleType = Enum.ScaleType.Stretch
 	IcyImage.BorderColor3 = Color3.fromRGB(20, 20, 20)
 	IcyImage.Position = UDim2.new(0.0249417536, 0, 0.0123815509, 0)
 	IcyImage.Size = UDim2.new(0, 91, 0, 91)
-	IcyImage.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=1538316870&width=420&height=420&format=png"
+	IcyImage.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=3277189729&width=420&height=420&format=png"
 
 	UICorner_7.CornerRadius = UDim.new(0, 4)
 	UICorner_7.Parent = IcyImage
@@ -251,7 +251,7 @@ UIBackground.ScaleType = Enum.ScaleType.Stretch
 	NillestImage.BorderColor3 = Color3.fromRGB(20, 20, 20)
 	NillestImage.Position = UDim2.new(0.0249417536, 0, 0.0219548456, 0)
 	NillestImage.Size = UDim2.new(0, 91, 0, 91)
-	NillestImage.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=5461671606&width=420&height=420&format=png"
+	NillestImage.Image = ""
 
 	UICorner_8.CornerRadius = UDim.new(0, 4)
 	UICorner_8.Parent = NillestImage
@@ -262,7 +262,7 @@ NillestImage2.Name = "NillestImage"
 	NillestImage2.BorderColor3 = Color3.fromRGB(20, 20, 20)
 	NillestImage2.Position = UDim2.new(0.0249417536, 0, 0.0315281403, 0)
 	NillestImage2.Size = UDim2.new(0, 91, 0, 91)
-	NillestImage2.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=4161128357&width=420&height=420&format=png"
+	NillestImage2.Image = ""
 
 	UICorner_888.CornerRadius = UDim.new(0, 4)
 	UICorner_888.Parent = NillestImage2
