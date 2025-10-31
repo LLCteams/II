@@ -1,5 +1,4 @@
---Minha Versão única - Magnus Modificações 
---Ser tive outro igual, e meu ramake rsrsrs
+
 local MarketplaceService = game:GetService("MarketplaceService")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -33,7 +32,7 @@ local redzlib = {
         	["Color Hub 2"] = Color3.fromRGB(35, 25, 5),
         	["Color Stroke"] = Color3.fromRGB(50, 35, 10),
         	["Color Theme"] = Color3.fromRGB(255, 140, 0), -- warna orange utama
-        	["Color Text"] = Color3.fromRGB(240, 240, 240),
+        	["Color Text"] = Color3.fromRGB(255, 200, 100),
 	        ["Color Dark Text"] = Color3.fromRGB(180, 180, 180),
         	["Color Dark Purple"] = Color3.fromRGB(255, 140, 0), -- ikut orange
         	["Color Hub 9"] = Color3.fromRGB(0, 0, 0, 0),
@@ -1868,13 +1867,13 @@ end
 	local Window, FirstTab = {}, false
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
-			Title = "UniX.launcher",
-			Text = "Are you sure want exits from UniX.launcher? this will make every features unable to stop by UniX.exe by selecting you can back to menu.",
+			Title = "UniX",
+			Text = "Are you sure want exits from UniX launcher? this will make every features unable to stop by UniX, now by selecting you can back to menu.",
 			Options = {
-				{"Exit UniX.launcher", function()
+				{"Exit", function()
 					ScreenGui:Destroy()
 				end},
-				{"Back to UniX.launcher"}
+				{"Back"}
 			}
 		})
 	end
