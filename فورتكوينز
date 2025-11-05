@@ -38,6 +38,21 @@ local redzlib = {
         	["Color Hub 9"] = Color3.fromRGB(0, 0, 0, 0),
         	["Color Dark Greem"] = Color3.fromRGB(43, 255, 0)
 		},
+        Pink = {
+	["Color Hub 1"] = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(35, 0, 25)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(50, 5, 35)),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(35, 0, 25))
+	    }),
+   	["Color Hub 2"] = Color3.fromRGB(60, 10, 45), -- gradasi lembut
+	["Color Stroke"] = Color3.fromRGB(255, 120, 200), -- glow edge tipis
+	["Color Theme"] = Color3.fromRGB(255, 110, 190), -- pink lembut tapi hidup
+	["Color Text"] = Color3.fromRGB(255, 245, 250), -- pink-putih terang (kontras)
+	["Color Dark Text"] = Color3.fromRGB(210, 170, 190), -- teks sekunder lembut
+	["Color Dark Purple"] = Color3.fromRGB(255, 130, 210), -- tambahan kilau pink neon lembut
+	["Color Hub 9"] = Color3.fromRGB(0, 0, 0, 0),
+	["Color Dark Greem"] = Color3.fromRGB(43, 255, 0)
+            },
 		Purple = {
 			["Color Hub 1"] = ColorSequence.new({
 				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)),
@@ -60,7 +75,7 @@ local redzlib = {
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "Orange"
+		Theme = "Pink"
 	},
 	Settings = {},
 	Connection = {},
