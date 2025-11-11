@@ -34,7 +34,7 @@ local redzlib = {
     	["Color Theme"] = Color3.fromRGB(0, 255, 255), -- Warna cyan utama (cerah)
     	["Color Text"] = Color3.fromRGB(200, 255, 255), -- Teks cyan-white terang
     	["Color Dark Text"] = Color3.fromRGB(150, 220, 230), -- Versi lebih lembut
-    	["Color Dark Purple"] = Color3.fromRGB(0, 200, 220), -- Tetap tone cyan
+    	["Color Dark Purple"] = Color3.fromRGB(200, 255, 255), -- Tetap tone cyan
     	["Color Hub 9"] = Color3.fromRGB(0, 0, 0),
     	["Color Dark Green"] = Color3.fromRGB(0, 255, 220)
             },
