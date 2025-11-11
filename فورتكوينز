@@ -23,6 +23,21 @@ local redzlib = {
 			["Color Text"] = Color3.fromRGB(243, 243, 243),
 			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
 		},
+     CyanBright = {
+	 ["Color Hub 1"] = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 50, 60)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 100, 120)),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 50, 60))
+	}),
+	["Color Hub 2"] = Color3.fromRGB(0, 80, 100),
+	["Color Stroke"] = Color3.fromRGB(0, 150, 170),
+	["Color Theme"] = Color3.fromRGB(0, 255, 255), -- Warna cyan utama (cerah)
+	["Color Text"] = Color3.fromRGB(80, 180, 255), -- Warna teks biru cerah
+	["Color Dark Text"] = Color3.fromRGB(40, 100, 180), -- Warna teks biru gelap
+	["Color Dark Purple"] = Color3.fromRGB(0, 200, 220), -- Disamakan dengan tone cyan
+	["Color Hub 9"] = Color3.fromRGB(0, 0, 0), -- Transparan simulasi gelap
+	["Color Dark Green"] = Color3.fromRGB(0, 255, 220) -- Aksen hijau kebiruan
+        },
 		Orange = {
 	["Color Hub 1"] = ColorSequence.new({
 		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(30, 20, 0)),
@@ -75,7 +90,7 @@ local redzlib = {
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "Orange"
+		Theme = "CyanBright"
 	},
 	Settings = {},
 	Connection = {},
