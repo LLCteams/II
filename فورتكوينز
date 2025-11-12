@@ -23,6 +23,21 @@ local redzlib = {
 			["Color Text"] = Color3.fromRGB(243, 243, 243),
 			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
 		},
+      PinkBright = {
+        ["Color Hub 1"] = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(60, 0, 50)),    -- gelap pink
+        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(120, 0, 100)),  -- medium pink
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(60, 0, 50))     -- gelap pink
+              }),
+       ["Color Hub 2"] = Color3.fromRGB(100, 0, 80),       -- background hub
+           ["Color Stroke"] = Color3.fromRGB(170, 0, 150),     -- garis/border
+           ["Color Theme"] = Color3.fromRGB(255, 0, 255),      -- warna pink utama
+           ["Color Text"] = Color3.fromRGB(255, 200, 255),     -- teks pink-white terang
+           ["Color Dark Text"] = Color3.fromRGB(230, 150, 230),-- teks lebih lembut
+           ["Color Dark Purple"] = Color3.fromRGB(200, 0, 180),-- tetap tone pink/magenta
+           ["Color Hub 9"] = Color3.fromRGB(0, 0, 0),          -- hitam untuk kontras
+           ["Color Dark Green"] = Color3.fromRGB(120, 0, 80)   -- “hijau gelap” diganti dengan dark magenta/pink gelap
+              },
      CyanBright = {
      	["Color Hub 1"] = ColorSequence.new({
 		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 50, 60)),
@@ -90,7 +105,7 @@ local redzlib = {
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "CyanBright"
+		Theme = "PinkBright"
 	},
 	Settings = {},
 	Connection = {},
