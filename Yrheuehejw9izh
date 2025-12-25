@@ -1,4 +1,3 @@
-
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local UIS = game:GetService("UserInputService")
@@ -84,6 +83,25 @@ local darklib = {
       ["Color Effect"] = Color3.fromRGB(85, 215, 0),
       ["Color Toggle Off"] = Color3.fromRGB(50, 180, 0)
     },
+  Winter = {
+      ["Color Hub 1"] = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(20, 30, 45)),
+        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(35, 55, 75)),
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(20, 30, 45))
+      }),
+      ["Color Hub 2"] = Color3.fromRGB(18, 28, 40),
+      ["Color Hub 3"] = Color3.fromRGB(120, 200, 255), -- ice blue
+      ["Color Hub 4"] = Color3.fromRGB(30, 40, 55),
+      ["Color Hub 5"] = Color3.fromRGB(70, 90, 120),
+      ["Color Hub 6"] = Color3.fromRGB(55, 75, 100),
+      ["Color Hub 7"] = Color3.fromRGB(160, 210, 255),
+      ["Color Stroke"] = Color3.fromRGB(25, 35, 50),
+      ["Color Theme"] = Color3.fromRGB(120, 200, 255),
+      ["Color Text"] = Color3.fromRGB(235, 245, 255),
+      ["Color Dark Text"] = Color3.fromRGB(190, 210, 225),
+      ["Color Effect"] = Color3.fromRGB(180, 230, 255),
+      ["Color Toggle Off"] = Color3.fromRGB(80, 120, 160)
+    },
   Purpler = {
       ["Color Hub 1"] = ColorSequence.new({
         ColorSequenceKeypoint.new(0.00, Color3.fromRGB(20, 20, 20)),
@@ -106,7 +124,7 @@ local darklib = {
   },
   Info = {
     Version = "1.0.2",
-    Theme = "Purpler",
+    Theme = "Winter",
     PlaceName = MarketplaceService:GetProductInfo(game.PlaceId).Name
   },
   Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/Darkmoonxhubscript/DarkLibV4/refs/heads/main/Icons.luau"))(),
