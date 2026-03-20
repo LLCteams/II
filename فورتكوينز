@@ -83,6 +83,21 @@ local redzlib = {
 	["Color Hub 9"] = Color3.fromRGB(0, 0, 0, 0),
 	["Color Dark Greem"] = Color3.fromRGB(43, 255, 0)
             },
+        IdulAdha = {
+	["Color Hub 1"] = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(10, 40, 25)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(20, 80, 45)),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(10, 40, 25))
+	}),
+	["Color Hub 2"] = Color3.fromRGB(25, 90, 50), -- hijau lembut islami	
+	["Color Stroke"] = Color3.fromRGB(255, 215, 120), -- gold glow (kemewahan)	
+	["Color Theme"] = Color3.fromRGB(40, 160, 90), -- hijau utama segar	
+	["Color Text"] = Color3.fromRGB(245, 255, 240), -- putih kehijauan (bersih & suci)	
+	["Color Dark Text"] = Color3.fromRGB(180, 220, 180), -- teks sekunder lembut	
+	["Color Dark Purple"] = Color3.fromRGB(255, 200, 100), -- aksen emas hangat
+	["Color Hub 9"] = Color3.fromRGB(0, 0, 0, 0),
+	["Color Dark Greem"] = Color3.fromRGB(0, 255, 120) -- neon green fresh
+}
 		Purple = {
 			["Color Hub 1"] = ColorSequence.new({
 				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)),
@@ -105,7 +120,7 @@ local redzlib = {
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "Orange"
+		Theme = "IdulAdha"
 	},
 	Settings = {},
 	Connection = {},
