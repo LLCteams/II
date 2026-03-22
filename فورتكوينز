@@ -53,6 +53,25 @@ local redzlib = {
     	["Color Hub 9"] = Color3.fromRGB(0, 0, 0),
     	["Color Dark Green"] = Color3.fromRGB(0, 255, 220)
             },
+        Yellow = {
+    ["Color Hub 1"] = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 35, 0)),
+        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(70, 60, 10)),
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 35, 0))
+    }),
+    ["Color Hub 2"] = Color3.fromRGB(60, 50, 10),
+    ["Color Stroke"] = Color3.fromRGB(120, 100, 20),
+    -- 🌟 Kuning utama (Joy vibe)
+    ["Color Theme"] = Color3.fromRGB(255, 215, 0),
+    -- ✨ Text hangat kekuningan
+    ["Color Text"] = Color3.fromRGB(255, 240, 150),
+    ["Color Dark Text"] = Color3.fromRGB(200, 200, 200),
+   -- 🔥 Accent kuning terang
+    ["Color Dark Purple"] = Color3.fromRGB(255, 200, 0),
+    ["Color Hub 9"] = Color3.fromRGB(0, 0, 0, 0),
+    -- biarin ini tetap neon biar kontras
+    ["Color Dark Greem"] = Color3.fromRGB(43, 255, 0)
+         },
 		Orange = {
 	["Color Hub 1"] = ColorSequence.new({
 		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(30, 20, 0)),
@@ -120,7 +139,7 @@ local redzlib = {
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "IdulAdha"
+		Theme = "Yellow"
 	},
 	Settings = {},
 	Connection = {},
