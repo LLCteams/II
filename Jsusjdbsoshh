@@ -1573,23 +1573,41 @@ function redzlib:MakeWindow(Configs)
 	
 	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
-    Size = UDim2.fromOffset(UISizeX, UISizeY),
-    Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
+	-- 🔥 BACKGROUND IMAGE (BISA DIGANTI)
+local BG = Instance.new("ImageLabel")
+BG.Parent = MainFrame
+BG.Size = UDim2.fromScale(1,1)
+BG.Position = UDim2.fromScale(0,0)
+BG.BackgroundTransparency = 1
 
-    BackgroundTransparency = 1, -- penting
-    
-    Image = "rbxassetid://128671163479606", -- 🔥 ganti ini
-    ScaleType = Enum.ScaleType.Stretch,
-    ImageTransparency = 0.1,
+BG.Image = "rbxassetid://128671163479606" -- 🔥 GANTI INI
+BG.ScaleType = Enum.ScaleType.Stretch
+BG.ImageTransparency = 0.2
+BG.ZIndex = 0
 
-    Name = "Hub"
-}), "Main")
-local Overlay = Create("Frame", MainFrame, {
-    Size = UDim2.fromScale(1,1),
-    BackgroundColor3 = Color3.fromRGB(0,0,0),
-    BackgroundTransparency = 0.4
-})
-Make("Corner", Overlay)
+function ChangeBackground(id)
+    BG.Image = "rbxassetid://"..id
+end
+
+local BackgroundList = {
+    Pink = 1234567890,
+    Dark = 9876543210,
+    Anime = 128671163479606
+}
+
+function SetBackground(name)
+    local id = BackgroundList[name]
+    if id then
+        BG.Image = "rbxassetid://"..id
+    end
+end
+		Size = UDim2.fromOffset(UISizeX, UISizeY),
+		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
+		BackgroundTransparency = 0.1,
+		Name = "Hub"
+	}), "Main")
+	Make("Gradient", MainFrame, {
+		Rotation = 45
 	})MakeDrag(MainFrame)
 	local MainCorner = Make("Corner", MainFrame, UDim.new(0, 12))
 	local Components = Create("Folder", MainFrame, {
