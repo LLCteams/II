@@ -1578,17 +1578,19 @@ function redzlib:MakeWindow(Configs)
 		BackgroundTransparency = 0.15,
 		Name = "Hub"
 	}), "Main")
-	-- 🔥 BACKGROUND IMAGE
+-- 🔥 BACKGROUND IMAGE
 local BG = Instance.new("ImageLabel")
 BG.Parent = MainFrame
 BG.Size = UDim2.fromScale(1,1)
 BG.Position = UDim2.fromScale(0,0)
 BG.BackgroundTransparency = 1
 
-BG.Image = "rbxassetid://128671163479606" -- 🔥 GANTI INI
+BG.Image = "rbxassetid://128671163479606"
 BG.ScaleType = Enum.ScaleType.Stretch
 BG.ImageTransparency = 0.2
-BG.ZIndex = -1
+
+BG.ZIndex = 1 -- ✅ FIX (jangan -1)
+
 function ChangeBackground(id)
     BG.Image = "rbxassetid://"..id
 end
