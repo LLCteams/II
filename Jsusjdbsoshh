@@ -1573,7 +1573,12 @@ function redzlib:MakeWindow(Configs)
 	
 	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
-	-- 🔥 BACKGROUND IMAGE (BISA DIGANTI)
+		Size = UDim2.fromOffset(UISizeX, UISizeY),
+		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
+		BackgroundTransparency = 0.15,
+		Name = "Hub"
+	}), "Main")
+	-- 🔥 BACKGROUND IMAGE
 local BG = Instance.new("ImageLabel")
 BG.Parent = MainFrame
 BG.Size = UDim2.fromScale(1,1)
@@ -1583,29 +1588,10 @@ BG.BackgroundTransparency = 1
 BG.Image = "rbxassetid://128671163479606" -- 🔥 GANTI INI
 BG.ScaleType = Enum.ScaleType.Stretch
 BG.ImageTransparency = 0.2
-BG.ZIndex = 0
-
+BG.ZIndex = -1
 function ChangeBackground(id)
     BG.Image = "rbxassetid://"..id
 end
-
-local BackgroundList = {
-    Pink = 1234567890,
-    Dark = 9876543210,
-    Anime = 128671163479606
-}
-
-function SetBackground(name)
-    local id = BackgroundList[name]
-    if id then
-        BG.Image = "rbxassetid://"..id
-    end
-end
-		Size = UDim2.fromOffset(UISizeX, UISizeY),
-		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-		BackgroundTransparency = 0.1,
-		Name = "Hub"
-	}), "Main")
 	Make("Gradient", MainFrame, {
 		Rotation = 45
 	})MakeDrag(MainFrame)
