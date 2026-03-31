@@ -1549,49 +1549,24 @@ function redzlib:Notify(Configs)
 	return Notification
 end
 
-function redzlib:MakeWindow(Configs)
-	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
-	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
-	
-	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
-	
-	local function LoadFile()
-		local File = Settings.ScriptFile
-		if type(File) ~= "string" then return end
-		if not readfile or not isfile then return end
-		local s, r = pcall(isfile, File)
-		
-		if s and r then
-			local s, _Flags = pcall(readfile, File)
-			
-			if s and type(_Flags) == "string" then
-				local s,r = pcall(function() return HttpService:JSONDecode(_Flags) end)
-				Flags = s and r or {}
-			end
-		end
-	end;LoadFile()
-	
 	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
+	
+	-- Ambil background ID dari Configs
+	local BackgroundID = Configs.BackgroundImage or Configs[4] or ""
+	if type(BackgroundID) == "number" or (type(BackgroundID) == "string" and tonumber(BackgroundID)) then
+		BackgroundID = "rbxassetid://" .. tostring(BackgroundID)
+	end
+
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
 		BackgroundTransparency = 0.15,
+		Image = BackgroundID, -- Memasukkan ID Gambar ke sini
+		ImageTransparency = Configs.BackgroundOpacity or 0, -- Transparansi gambar
+		ScaleType = Enum.ScaleType.Stretch, -- Agar gambar memenuhi window
 		Name = "Hub"
 	}), "Main")
-	-- 🔥 BACKGROUND IMAGE
-local BG = Instance.new("ImageLabel")
-BG.Parent = MainFrame
-BG.Size = UDim2.fromScale(1,1)
-BG.Position = UDim2.fromScale(0,0)
-BG.BackgroundTransparency = 1
 
-BG.Image = "rbxassetid://128671163479606" -- 🔥 GANTI INI
-BG.ScaleType = Enum.ScaleType.Stretch
-BG.ImageTransparency = 0.2
-BG.ZIndex = -1
-function ChangeBackground(id)
-    BG.Image = "rbxassetid://"..id
-end
 	Make("Gradient", MainFrame, {
 		Rotation = 45
 	})MakeDrag(MainFrame)
