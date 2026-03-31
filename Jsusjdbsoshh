@@ -1549,26 +1549,29 @@ function redzlib:Notify(Configs)
 	return Notification
 end
 
-	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
-	
-	-- Ambil background ID dari Configs
-	local BackgroundID = Configs.BackgroundImage or Configs[4] or ""
-	if type(BackgroundID) == "number" or (type(BackgroundID) == "string" and tonumber(BackgroundID)) then
-		BackgroundID = "rbxassetid://" .. tostring(BackgroundID)
-	end
+local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
 
-	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
-		Size = UDim2.fromOffset(UISizeX, UISizeY),
-		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-		BackgroundTransparency = 0.15,
-		Image = BackgroundID, -- Memasukkan ID Gambar ke sini
-		ImageTransparency = Configs.BackgroundOpacity or 0, -- Transparansi gambar
-		ScaleType = Enum.ScaleType.Stretch, -- Agar gambar memenuhi window
-		Name = "Hub"
-	}), "Main")
+-- Logika Image ID
+local BgId = Configs.BackgroundImage or ""
+if tonumber(BgId) then 
+    BgId = "rbxassetid://" .. tostring(BgId) 
+end
 
-	Make("Gradient", MainFrame, {
-		Rotation = 45
+local MainFrame = Create("ImageButton", ScreenGui, {
+    Size = UDim2.fromOffset(UISizeX, UISizeY),
+    Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
+    BackgroundColor3 = redzlib.Themes[redzlib.Save.Theme]["Color Hub 2"],
+    BackgroundTransparency = (BgId ~= "" and 1) or 0.15, -- Transparan jika ada gambar
+    Image = BgId,
+    ImageTransparency = Configs.BackgroundOpacity or 0,
+    ScaleType = Enum.ScaleType.Stretch,
+    Name = "Hub"
+})
+InsertTheme(MainFrame, "Main")
+
+-- PENTING: Matikan baris Gradient ini agar tidak menutupi gambar
+-- Make("Gradient", MainFrame, { Rotation = 45 }) 
+
 	})MakeDrag(MainFrame)
 	local MainCorner = Make("Corner", MainFrame, UDim.new(0, 12))
 	local Components = Create("Folder", MainFrame, {
