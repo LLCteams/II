@@ -1581,27 +1581,19 @@ function redzlib:MakeWindow(Configs)
 -- 🔥 BACKGROUND IMAGE
 local BG = Instance.new("ImageLabel")
 BG.Parent = MainFrame
+BG.AnchorPoint = Vector2.new(0.5, 0.5)
+BG.Position = UDim2.fromScale(0.5, 0.5)
 BG.Size = UDim2.fromScale(1,1)
-BG.Position = UDim2.fromScale(0,0)
-BG.BackgroundTransparency = 1
 
+BG.BackgroundTransparency = 1
 BG.Image = "rbxassetid://128671163479606"
-BG.ScaleType = Enum.ScaleType.Crop -- ✅ FIX
-BG.ImageTransparency = 0.5 -- ✅ lebih gelap
+
+BG.ScaleType = Enum.ScaleType.Fit -- ✅ FIX OVERFLOW
+BG.ImageTransparency = 0.3 -- ✅ TIDAK TERLALU GELAP
 BG.ZIndex = 1
 
--- 🔥 DARK OVERLAY (BIAR GAK TERANG)
-local DarkOverlay = Instance.new("Frame")
-DarkOverlay.Parent = BG
-DarkOverlay.Size = UDim2.fromScale(1,1)
-DarkOverlay.BackgroundColor3 = Color3.new(0,0,0)
-DarkOverlay.BackgroundTransparency = 0.4
-DarkOverlay.ZIndex = 2
+MainFrame.ClipsDescendants = true -- safety
 
--- 🔥 CLIP BIAR GAK KELUAR
-MainFrame.ClipsDescendants = true
-
--- 🔄 CHANGE BACKGROUND
 function ChangeBackground(id)
     BG.Image = "rbxassetid://"..id
 end
