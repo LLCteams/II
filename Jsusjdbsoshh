@@ -8,7 +8,6 @@ local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
-local Event = game:GetService("ReplicatedStorage").Remotes.CenterNotification
 
 local redzlib = {
 	Themes = {
@@ -1809,7 +1808,23 @@ end
 		SaveJson("Library Saved.json", redzlib.Save)
 	end)
 	
---// Buttons Folder
+-- =========================
+-- 🔵 CUSTOM SCRIPT (EXECUTOR STYLE)
+-- =========================
+local function RunCustom()
+    -- 🔥 ISI SCRIPT KAMU DI SINI
+    local Event = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CenterNotification")
+
+    firesignal(Event.OnClientEvent,
+        "Are you cumming..",
+        105,
+        nil
+    )
+end
+
+-- =========================
+-- BUTTONS
+-- =========================
 local ButtonsFolder = Create("Folder", TopBar, {
     Name = "Buttons"
 })
@@ -1835,11 +1850,10 @@ local MinimizeButton = SetProps(CloseButton:Clone(), {
 -- 🔵 CUSTOM
 local CustomButton = SetProps(CloseButton:Clone(), {
     Position = UDim2.new(1, -60, 0.5),
-    Image = "rbxassetid://134024520329952",
+    Image = "rbxassetid://6031091002",
     Name = "Custom"
 })
 
--- Masukkan ke folder
 SetChildren(ButtonsFolder, {
     CloseButton,
     MinimizeButton,
@@ -1847,49 +1861,48 @@ SetChildren(ButtonsFolder, {
 })
 
 -- =========================
--- 🔥 FIX WINDOW (JANGAN TIMPA)
+-- 🔥 FIX REFERENCE
 -- =========================
-local WindowRef = Window -- simpan referensi asli
+local Destroyed = false
 
 -- =========================
--- 🔴 CLOSE FUNCTION
+-- 🔴 CLOSE (FIX TOTAL)
 -- =========================
 CloseButton.MouseButton1Click:Connect(function()
-    if WindowRef and WindowRef.CloseBtn then
-        WindowRef:CloseBtn()
-    elseif MainFrame then
+    if Destroyed then return end
+    Destroyed = true
+
+    pcall(function()
+        -- Hapus semua isi UI dulu
+        for _, v in pairs(MainFrame:GetDescendants()) do
+            if v:IsA("GuiObject") then
+                v.Visible = false
+            end
+        end
+
+        task.wait(0.05)
+
+        -- Destroy utama
         MainFrame:Destroy()
-    end
+    end)
 end)
 
 -- =========================
--- 🟡 MINIMIZE FUNCTION
+-- 🟡 MINIMIZE
 -- =========================
 MinimizeButton.MouseButton1Click:Connect(function()
-    if WindowRef and WindowRef.MinimizeBtn then
-        WindowRef:MinimizeBtn()
-    elseif MainFrame then
+    if MainFrame and MainFrame.Parent then
         MainFrame.Visible = not MainFrame.Visible
     end
 end)
 
 -- =========================
--- 🔵 CUSTOM FUNCTION
+-- 🔵 CUSTOM EXECUTOR
 -- =========================
 CustomButton.MouseButton1Click:Connect(function()
-   -- click
-
-    -- contoh aksi bebas
-    if WindowRef and WindowRef.Notify then
-        pcall(function()
-firesignal(Event.OnClientEvent, 
-    "Stop cumming",
-    105,
-    nil
-)
-            })
-        end)
-    end
+    pcall(function()
+        RunCustom()
+    end)
 end)
 
 local Minimized, SaveSize, WaitClick
