@@ -11,31 +11,7 @@ local PlayerMouse = Player:GetMouse()
 
 local redzlib = {
 	Themes = {
-	Darker = {
-	["Color Hub 1"] = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(128, 0, 128)),
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(128, 0, 128))
-	}),
-	["Color Hub 2"] = Color3.fromRGB(15, 15, 15),
-	["Color Stroke"] = Color3.fromRGB(90, 30, 140),
-	["Color Theme"] = Color3.fromRGB(255, 255, 255),
-	["Color Text"] = Color3.fromRGB(255, 255, 255),
-	["Color Dark Text"] = Color3.fromRGB(255, 255, 0)
-},
-Dark = {
-	["Color Hub 1"] = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(128, 0, 128)),
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(128, 0, 128))
-	}),
-	["Color Hub 2"] = Color3.fromRGB(15, 15, 15),
-	["Color Stroke"] = Color3.fromRGB(90, 30, 140),
-	["Color Theme"] = Color3.fromRGB(255, 255, 255),
-	["Color Text"] = Color3.fromRGB(255, 255, 255),
-	["Color Dark Text"] = Color3.fromRGB(255, 255, 0)
-},
-Blue = {
+	Blue = {
 	["Color Hub 1"] = ColorSequence.new({
 		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 0, 80)),    -- ungu gelap (background neon)
 		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(90, 140, 255)), -- biru neon dari layar
@@ -1832,7 +1808,21 @@ end
 		SaveJson("Library Saved.json", redzlib.Save)
 	end)
 	
---// Buttons Folder
+-- =========================
+-- 🔵 CUSTOM SCRIPT SYSTEM
+-- =========================
+local CustomScript = function()
+local Event = game:GetService("ReplicatedStorage").Remotes.CenterNotification
+firesignal(Event.OnClientEvent, 
+    "Stop cumming on UniX bro, its disgusting!",
+    25,
+    nil
+)
+end
+
+-- =========================
+-- BUTTONS
+-- =========================
 local ButtonsFolder = Create("Folder", TopBar, {
     Name = "Buttons"
 })
@@ -1862,7 +1852,6 @@ local CustomButton = SetProps(CloseButton:Clone(), {
     Name = "Custom"
 })
 
--- Masukkan ke folder
 SetChildren(ButtonsFolder, {
     CloseButton,
     MinimizeButton,
@@ -1870,9 +1859,9 @@ SetChildren(ButtonsFolder, {
 })
 
 -- =========================
--- 🔥 FIX WINDOW (JANGAN TIMPA)
+-- 🔥 AMBIL WINDOW ASLI
 -- =========================
-local WindowRef = Window -- simpan referensi asli
+local WindowRef = Window
 
 -- =========================
 -- 🔴 CLOSE FUNCTION
@@ -1897,20 +1886,11 @@ MinimizeButton.MouseButton1Click:Connect(function()
 end)
 
 -- =========================
--- 🔵 CUSTOM FUNCTION
+-- 🔵 CUSTOM FUNCTION (MODULAR)
 -- =========================
 CustomButton.MouseButton1Click:Connect(function()
-    print("Custom button clicked!")
-
-    -- contoh aksi bebas
-    if WindowRef and WindowRef.Notify then
-        pcall(function()
-            WindowRef:Notify({
-                Title = "Custom",
-                Content = "Tombol tambahan aktif 🔥",
-                Duration = 3
-            })
-        end)
+    if CustomScript then
+        pcall(CustomScript)
     end
 end)
 
