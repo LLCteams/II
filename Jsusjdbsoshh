@@ -1839,7 +1839,7 @@ end
 local CustomScript = function()
 firesignal(Event.OnClientEvent, 
     "Stop cumming on UniX bro, its disgusting!",
-    25,
+    105,
     nil
 )
 end
