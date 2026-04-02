@@ -38,18 +38,18 @@ Dark = {
 },
 Blue = {
 	["Color Hub 1"] = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(128, 0, 128)),
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(128, 0, 128))
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(80, 0, 120)),   -- ungu gelap
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(180, 220, 255)), -- biru terang lembut
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(80, 0, 120))
 	}),
-	["Color Hub 2"] = Color3.fromRGB(15, 15, 15),
-	["Color Stroke"] = Color3.fromRGB(90, 30, 140),
-	["Color Theme"] = Color3.fromRGB(255, 255, 255),
-	["Color Text"] = Color3.fromRGB(255, 255, 255),
-	["Color Dark Text"] = Color3.fromRGB(255, 255, 0),
-	["Color Dark Blue"] = Color3.fromRGB(0, 0, 255),
-	["Color Hub 9"] = Color3.fromRGB(0, 0, 0),
-	["Color Yellow"] = Color3.fromRGB(255, 255, 255)
+	["Color Hub 2"] = Color3.fromRGB(18, 18, 28),       -- background dark (lebih soft dari hitam)
+	["Color Stroke"] = Color3.fromRGB(120, 80, 255),    -- outline neon ungu
+	["Color Theme"] = Color3.fromRGB(220, 230, 255),    -- putih kebiruan
+	["Color Text"] = Color3.fromRGB(230, 240, 255),     -- text utama
+	["Color Dark Text"] = Color3.fromRGB(150, 180, 255),-- text sekunder (bukan kuning lagi)
+	["Color Dark Blue"] = Color3.fromRGB(40, 80, 200),  -- biru utama
+	["Color Hub 9"] = Color3.fromRGB(8, 8, 12),         -- hampir hitam (depth)
+	["Color Yellow"] = Color3.fromRGB(180, 220, 255)    -- ganti jadi aksen biru muda
 }
 	},
 	Info = {
@@ -1581,20 +1581,15 @@ function redzlib:MakeWindow(Configs)
 -- 🔥 BACKGROUND IMAGE
 local BG = Instance.new("ImageLabel")
 BG.Parent = MainFrame
-
-BG.AnchorPoint = Vector2.new(0.5, 0.5)
-BG.Position = UDim2.fromScale(0.5, 0.5)
 BG.Size = UDim2.fromScale(1,1)
-
+BG.Position = UDim2.fromScale(0,0)
 BG.BackgroundTransparency = 1
-BG.Image = "rbxassetid://128671163479606"
 
-BG.ScaleType = Enum.ScaleType.Crop -- ✅ FULL
-BG.ImageTransparency = 0.25 -- ✅ TIDAK TERLALU GELAP
-BG.ZIndex = 1
+BG.Image = "rbxassetid://105969819487428"
+BG.ScaleType = Enum.ScaleType.Stretch
+BG.ImageTransparency = 0.2
 
--- 🔥 WAJIB BIAR GAK KELUAR
-MainFrame.ClipsDescendants = true
+BG.ZIndex = 1 -- ✅ FIX (jangan -1)
 
 function ChangeBackground(id)
     BG.Image = "rbxassetid://"..id
@@ -1869,7 +1864,7 @@ end
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
 			Title = "Close",
-			Text = "Exit?",
+			Text = "Deseja realmente fechar o Lyra Hub? Ele contém recursos essenciais e fechar agora pode interromper funções importantes, causar falhas ou perder suas configurações. Cuidado antes de prosseguir!",
 			Options = {
 				{"Confirm", function()
 					ScreenGui:Destroy()
