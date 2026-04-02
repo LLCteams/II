@@ -12,44 +12,20 @@ local Event = game:GetService("ReplicatedStorage").Remotes.CenterNotification
 
 local redzlib = {
 	Themes = {
-	Darker = {
+	Blue = {
 	["Color Hub 1"] = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(128, 0, 128)),
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(128, 0, 128))
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 0, 80)),    -- ungu gelap (background neon)
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(90, 140, 255)), -- biru neon dari layar
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 0, 80))
 	}),
-	["Color Hub 2"] = Color3.fromRGB(15, 15, 15),
-	["Color Stroke"] = Color3.fromRGB(90, 30, 140),
-	["Color Theme"] = Color3.fromRGB(255, 255, 255),
-	["Color Text"] = Color3.fromRGB(255, 255, 255),
-	["Color Dark Text"] = Color3.fromRGB(255, 255, 0)
-},
-Dark = {
-	["Color Hub 1"] = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(128, 0, 128)),
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(128, 0, 128))
-	}),
-	["Color Hub 2"] = Color3.fromRGB(15, 15, 15),
-	["Color Stroke"] = Color3.fromRGB(90, 30, 140),
-	["Color Theme"] = Color3.fromRGB(255, 255, 255),
-	["Color Text"] = Color3.fromRGB(255, 255, 255),
-	["Color Dark Text"] = Color3.fromRGB(255, 255, 0)
-},
-Blue = {
-	["Color Hub 1"] = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(128, 0, 128)),
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(128, 0, 128))
-	}),
-	["Color Hub 2"] = Color3.fromRGB(15, 15, 15),
-	["Color Stroke"] = Color3.fromRGB(90, 30, 140),
-	["Color Theme"] = Color3.fromRGB(255, 255, 255),
-	["Color Text"] = Color3.fromRGB(255, 255, 255),
-	["Color Dark Text"] = Color3.fromRGB(255, 255, 0),
-	["Color Dark Blue"] = Color3.fromRGB(0, 0, 255),
-	["Color Hub 9"] = Color3.fromRGB(0, 0, 0),
-	["Color Yellow"] = Color3.fromRGB(255, 255, 255)
+	["Color Hub 2"] = Color3.fromRGB(12, 12, 18),       -- gelap banget (background utama)
+	["Color Stroke"] = Color3.fromRGB(120, 80, 255),    -- glow ungu
+	["Color Theme"] = Color3.fromRGB(180, 200, 255),    -- putih kebiruan (UI utama)
+	["Color Text"] = Color3.fromRGB(170, 140, 255),     -- ungu neon (kayak layar karakter)
+	["Color Dark Text"] = Color3.fromRGB(120, 100, 200),-- ungu redup
+	["Color Dark Blue"] = Color3.fromRGB(20, 50, 140),  -- biru dalam
+	["Color Hub 9"] = Color3.fromRGB(5, 5, 10),         -- hampir hitam
+	["Color Yellow"] = Color3.fromRGB(140, 180, 255)    -- ganti jadi biru glow
 }
 	},
 	Info = {
@@ -1833,20 +1809,7 @@ end
 		SaveJson("Library Saved.json", redzlib.Save)
 	end)
 	
--- =========================
--- 🔵 CUSTOM SCRIPT SYSTEM
--- =========================
-local CustomScript = function()
-firesignal(Event.OnClientEvent, 
-    "Stop cumming on UniX bro, its disgusting!",
-    105,
-    nil
-)
-end
-
--- =========================
--- BUTTONS
--- =========================
+--// Buttons Folder
 local ButtonsFolder = Create("Folder", TopBar, {
     Name = "Buttons"
 })
@@ -1876,6 +1839,7 @@ local CustomButton = SetProps(CloseButton:Clone(), {
     Name = "Custom"
 })
 
+-- Masukkan ke folder
 SetChildren(ButtonsFolder, {
     CloseButton,
     MinimizeButton,
@@ -1883,9 +1847,9 @@ SetChildren(ButtonsFolder, {
 })
 
 -- =========================
--- 🔥 AMBIL WINDOW ASLI
+-- 🔥 FIX WINDOW (JANGAN TIMPA)
 -- =========================
-local WindowRef = Window
+local WindowRef = Window -- simpan referensi asli
 
 -- =========================
 -- 🔴 CLOSE FUNCTION
@@ -1910,11 +1874,21 @@ MinimizeButton.MouseButton1Click:Connect(function()
 end)
 
 -- =========================
--- 🔵 CUSTOM FUNCTION (MODULAR)
+-- 🔵 CUSTOM FUNCTION
 -- =========================
 CustomButton.MouseButton1Click:Connect(function()
-    if CustomScript then
-        pcall(CustomScript)
+   -- click
+
+    -- contoh aksi bebas
+    if WindowRef and WindowRef.Notify then
+        pcall(function()
+firesignal(Event.OnClientEvent, 
+    "Stop cumming",
+    105,
+    nil
+)
+            })
+        end)
     end
 end)
 
