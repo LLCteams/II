@@ -1,7 +1,26 @@
 
 local MarketplaceService = game:GetService("MarketplaceService")
-local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
+
+-- =====================================
+-- 🔥 TARUH DI SINI (PALING ATAS)
+-- =====================================
+local IsDestroyed = false
+
+local function SafeRandom(min, max)
+    if typeof(min) ~= "number" or typeof(max) ~= "number" then
+        warn("Random error:", min, max)
+        return 0
+    end
+
+    if min >= max then
+        return min
+    end
+
+    return SafeRandom(min, max)
+end
+-- =====================================
 local HttpService = game:GetService("HttpService")
 local RunService = game:GetService("RunService")
 local CoreGui = game:GetService("CoreGui")
@@ -1671,11 +1690,17 @@ end
 		if #ActiveParticles >= ParticleConfig.MaxParticles then return end
 		
 		local containerSize = ParticleContainer.AbsoluteSize
-		local startX = math.random(10, containerSize.X - 10)
+		if not ParticleConfig or not ParticleConfig.ParticleSize or not ParticleConfig.ParticleSpeed then
+    warn("ParticleConfig missing")
+    return
+end
+
+local size = SafeRandom(ParticleConfig.ParticleSize.Min, ParticleConfig.ParticleSize.Max)
+local speed = SafeRandom(ParticleConfig.ParticleSpeed.Min, ParticleConfig.ParticleSpeed.Max)
 		local startY = containerSize.Y + 20
 		
-		local size = math.random(ParticleConfig.ParticleSize.Min, ParticleConfig.ParticleSize.Max)
-		local speed = math.random(ParticleConfig.ParticleSpeed.Min, ParticleConfig.ParticleSpeed.Max)
+		local size = SafeRandom(ParticleConfig.ParticleSize.Min, ParticleConfig.ParticleSize.Max)
+		local speed = SafeRandom(ParticleConfig.ParticleSpeed.Min, ParticleConfig.ParticleSpeed.Max)
 		
 		local particleColor = Color3.fromRGB(255, 255, 255)
 		
@@ -1855,8 +1880,8 @@ local Destroyed = false -- anti double destroy
 -- 🔴 CLOSE FUNCTION (ANTI ERROR)
 -- =========================
 CloseButton.MouseButton1Click:Connect(function()
-    if Destroyed then return end
-    Destroyed = true
+    if IsDestroyed then return end
+    IsDestroyed = true
 
     pcall(function()
         if WindowRef and WindowRef.CloseBtn then
@@ -2888,7 +2913,7 @@ local Window, FirstTab = {}, false
 			LabelVal:GetPropertyChangedSignal("Text"):Connect(function()
 				UIScale.Scale = 0.3
 				CreateTween({UIScale, "Scale", 1.2, 0.1})
-				CreateTween({LabelVal, "Rotation", math.random(-1, 1) * 5, 0.15, true})
+				CreateTween({LabelVal, "Rotation", SafeRandom(-1, 1) * 5, 0.15, true})
 				CreateTween({UIScale, "Scale", 1, 0.2})
 				CreateTween({LabelVal, "Rotation", 0, 0.1})
 			end)
