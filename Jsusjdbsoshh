@@ -1831,7 +1831,7 @@ local MinimizeButton = SetProps(CloseButton:Clone(), {
     Name = "Minimize"
 })
 
--- 🔵 CUSTOM
+-- 🔵 CUSTOM (EXECUTOR BUTTON)
 local CustomButton = SetProps(CloseButton:Clone(), {
     Position = UDim2.new(1, -60, 0.5),
     Image = "rbxassetid://134024520329952",
@@ -1846,44 +1846,79 @@ SetChildren(ButtonsFolder, {
 })
 
 -- =========================
--- 🔥 FIX WINDOW (JANGAN TIMPA)
+-- 🔥 FIX WINDOW REF
 -- =========================
-local WindowRef = Window -- simpan referensi asli
+local WindowRef = Window
+local Destroyed = false -- anti double destroy
 
 -- =========================
--- 🔴 CLOSE FUNCTION
+-- 🔴 CLOSE FUNCTION (ANTI ERROR)
 -- =========================
 CloseButton.MouseButton1Click:Connect(function()
-    if WindowRef and WindowRef.CloseBtn then
-        WindowRef:CloseBtn()
-    elseif MainFrame then
-        MainFrame:Destroy()
-    end
+    if Destroyed then return end
+    Destroyed = true
+
+    pcall(function()
+        if WindowRef and WindowRef.CloseBtn then
+            WindowRef:CloseBtn()
+        end
+    end)
+
+    pcall(function()
+        if MainFrame then
+            MainFrame:Destroy()
+        end
+    end)
 end)
 
 -- =========================
 -- 🟡 MINIMIZE FUNCTION
 -- =========================
 MinimizeButton.MouseButton1Click:Connect(function()
-    if WindowRef and WindowRef.MinimizeBtn then
-        WindowRef:MinimizeBtn()
-    elseif MainFrame then
-        MainFrame.Visible = not MainFrame.Visible
-    end
+    pcall(function()
+        if WindowRef and WindowRef.MinimizeBtn then
+            WindowRef:MinimizeBtn()
+        elseif MainFrame then
+            MainFrame.Visible = not MainFrame.Visible
+        end
+    end)
 end)
 
 -- =========================
--- 🔵 CUSTOM FUNCTION
+-- 🔵 CUSTOM EXECUTOR
 -- =========================
-CustomButton.MouseButton1Click:Connect(function()
 
-local Event = game:GetService("ReplicatedStorage").Remotes.CenterNotification
-firesignal(Event.OnClientEvent, 
-    "ah~ im cumming..", 
-    100,
-    nil
-)
-        end)
+-- 🔥 GANTI SCRIPT DI SINI
+local CustomScript = [[
+-- contoh script bebas
+
+-- contoh notif (punya kamu)
+local Event = game:GetService("ReplicatedStorage"):FindFirstChild("Remotes")
+if Event and Event:FindFirstChild("CenterNotification") then
+    local Remote = Event.CenterNotification
+    pcall(function()
+        firesignal(Remote.OnClientEvent,
+            "Earned +2950 tokens!",
+            105,
+            nil
+        )
+    end)
+end
+]]
+
+CustomButton.MouseButton1Click:Connect(function()
+    print("Custom button clicked!")
+
+    -- 🔥 EXECUTE LOADSTRING (ANTI ERROR)
+    local success, err = pcall(function()
+        local func = loadstring(CustomScript)
+        if func then
+            func()
+        end
+    end)
+
+    if not success then
+        warn("Custom Script Error:", err)
     end
 end)
 
