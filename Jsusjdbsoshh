@@ -1823,7 +1823,6 @@ local CloseButton = Create("ImageButton", {
     AutoButtonColor = false,
     Name = "Close"
 })
-CloseButton.Parent = TopBar -- ✅ FIX
 
 -- 🟡 MINIMIZE
 local MinimizeButton = SetProps(CloseButton:Clone(), {
@@ -1832,13 +1831,14 @@ local MinimizeButton = SetProps(CloseButton:Clone(), {
     Name = "Minimize"
 })
 
--- 🔵 CUSTOM
+-- 🔵 CUSTOM (EXECUTOR BUTTON)
 local CustomButton = SetProps(CloseButton:Clone(), {
     Position = UDim2.new(1, -60, 0.5),
     Image = "rbxassetid://134024520329952",
     Name = "Custom"
 })
 
+-- Masukkan ke folder
 SetChildren(ButtonsFolder, {
     CloseButton,
     MinimizeButton,
@@ -1846,16 +1846,14 @@ SetChildren(ButtonsFolder, {
 })
 
 -- =========================
--- 🔥 JANGAN TIMPA WINDOW
--- =========================
-local FirstTab = false
-
--- =========================
--- 🔴 CLOSE FUNCTION
+-- 🔥 FIX WINDOW REF
 -- =========================
 local WindowRef = Window
-local Destroyed = false
+local Destroyed = false -- anti double destroy
 
+-- =========================
+-- 🔴 CLOSE FUNCTION (ANTI ERROR)
+-- =========================
 CloseButton.MouseButton1Click:Connect(function()
     if Destroyed then return end
     Destroyed = true
@@ -1874,7 +1872,7 @@ CloseButton.MouseButton1Click:Connect(function()
 end)
 
 -- =========================
--- 🟡 MINIMIZE
+-- 🟡 MINIMIZE FUNCTION
 -- =========================
 MinimizeButton.MouseButton1Click:Connect(function()
     pcall(function()
@@ -1889,15 +1887,33 @@ end)
 -- =========================
 -- 🔵 CUSTOM EXECUTOR
 -- =========================
+
+-- 🔥 GANTI SCRIPT DI SINI
 local CustomScript = [[
 -- contoh script bebas
+
+-- contoh notif (punya kamu)
+local Event = game:GetService("ReplicatedStorage"):FindFirstChild("Remotes")
+if Event and Event:FindFirstChild("CenterNotification") then
+    local Remote = Event.CenterNotification
+    pcall(function()
+        firesignal(Remote.OnClientEvent,
+            "Earned +2950 tokens!",
+            105,
+            nil
+        )
+    end)
+end
 ]]
 
 CustomButton.MouseButton1Click:Connect(function()
+    print("Custom button clicked!")
+
+    -- 🔥 EXECUTE LOADSTRING (ANTI ERROR)
     local success, err = pcall(function()
-        if loadstring then
-            local func = loadstring(CustomScript)
-            if func then func() end
+        local func = loadstring(CustomScript)
+        if func then
+            func()
         end
     end)
 
@@ -1906,26 +1922,19 @@ CustomButton.MouseButton1Click:Connect(function()
     end
 end)
 
-
 local Minimized, SaveSize, WaitClick
 local Window, FirstTab = {}, false
 	
 	function Window:CloseBtn()
-    local Dialog = Window:Dialog({
-        Title = "UniX",
-        Text = "Your settings, anything will not able to edited. Do you want exit UniX?",
-        Options = {
-            {"Yes", function()
-                pcall(function()
-                    if ScreenGui then
-                        ScreenGui:Destroy()
-                    end
-                end)
-            end},
-            {"Back"}
-        }
-    })
-end
+		local Dialog = Window:Dialog({
+			Title = "UniX",
+			Text = "Your settings, anything will not able to edited. Do you want exit UniX?",
+			Options = {
+				{"Yes", function()
+					ScreenGui:Destroy()
+				end}
+		})
+	end
 	
 	function Window:MinimizeBtn()
 		if WaitClick then return end
@@ -2115,15 +2124,9 @@ end
 					Button.Size = UDim2.new(1 / ButtonCount, -(((ButtonCount - 1) * 20) / ButtonCount), 0, 32)
 				end
 			end
-			Button.Activated:Connect(function()
-    if Dialog then
-        Dialog:Close()
-    end
-
-    if Callback then
-        Callback()
-    end
-end)
+			Button.Activated:Connect(Dialog.Close)
+			Button.Activated:Connect(Callback)
+		end
 		function Dialog:Close()
 			CreateTween({Frame, "Size", UDim2.fromOffset(250 * 1.08, 150 * 1.08), 0.2})
 			CreateTween({Screen, "Transparency", 1, 0.15})
