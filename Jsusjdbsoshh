@@ -13,18 +13,22 @@ local redzlib = {
 	Themes = {
 	Blue = {
 	["Color Hub 1"] = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 0, 80)),    -- ungu gelap (background neon)
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(90, 140, 255)), -- biru neon dari layar
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 0, 80))
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(25, 0, 60)),   -- lebih gelap biar teks naik
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(70, 120, 255)),-- neon biru lebih soft
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 0, 60))
 	}),
-	["Color Hub 2"] = Color3.fromRGB(12, 12, 18),       -- gelap banget (background utama)
-	["Color Stroke"] = Color3.fromRGB(120, 80, 255),    -- glow ungu
-	["Color Theme"] = Color3.fromRGB(180, 200, 255),    -- putih kebiruan (UI utama)
-	["Color Text"] = Color3.fromRGB(170, 140, 255),     -- ungu neon (kayak layar karakter)
-	["Color Dark Text"] = Color3.fromRGB(120, 100, 200),-- ungu redup
-	["Color Dark Blue"] = Color3.fromRGB(20, 50, 140),  -- biru dalam
-	["Color Hub 9"] = Color3.fromRGB(5, 5, 10),         -- hampir hitam
-	["Color Yellow"] = Color3.fromRGB(140, 180, 255)    -- ganti jadi biru glow
+
+	["Color Hub 2"] = Color3.fromRGB(8, 8, 15),        -- background lebih gelap (biar teks jelas)
+	["Color Stroke"] = Color3.fromRGB(140, 100, 255),  -- glow lebih hidup
+	["Color Theme"] = Color3.fromRGB(220, 230, 255),   -- PUTIH terang (utama biar kebaca)
+
+	["Color Text"] = Color3.fromRGB(200, 180, 255),    -- title (lebih terang dari sebelumnya)
+	["Color Dark Text"] = Color3.fromRGB(150, 130, 230), -- subtitle (lebih jelas, gak terlalu redup)
+
+	["Color Dark Blue"] = Color3.fromRGB(15, 40, 120),
+	["Color Hub 9"] = Color3.fromRGB(3, 3, 8),
+
+	["Color Yellow"] = Color3.fromRGB(120, 170, 255)   -- biru glow tombol
 }
 	},
 	Info = {
