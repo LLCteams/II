@@ -1553,19 +1553,31 @@ function redzlib:MakeWindow(Configs)
 		BackgroundTransparency = 0.15,
 		Name = "Hub"
 	}), "Main")
--- 🔥 BACKGROUND IMAGE
+-- 🔥 BACKGROUND IMAGE DENGAN CLIPPING
+local BGFrame = Instance.new("Frame")
+BGFrame.Parent = MainFrame
+BGFrame.Size = UDim2.fromScale(1,1)
+BGFrame.Position = UDim2.fromScale(0,0)
+BGFrame.BackgroundTransparency = 1
+BGFrame.ClipsDescendants = true -- penting supaya image ikut rounded
+
+-- Rounded corners
+local BGFrameCorner = Instance.new("UICorner")
+BGFrameCorner.CornerRadius = UDim.new(0, 12) -- samakan dengan MainFrame
+BGFrameCorner.Parent = BGFrame
+
+-- ImageLabel
 local BG = Instance.new("ImageLabel")
-BG.Parent = MainFrame
+BG.Parent = BGFrame
 BG.Size = UDim2.fromScale(1,1)
 BG.Position = UDim2.fromScale(0,0)
 BG.BackgroundTransparency = 1
-
 BG.Image = "rbxassetid://105969819487428"
 BG.ScaleType = Enum.ScaleType.Stretch
 BG.ImageTransparency = 0.2
-
 BG.ZIndex = 1 -- ✅ FIX (jangan -1)
 
+-- Fungsi untuk ganti background
 function ChangeBackground(id)
     BG.Image = "rbxassetid://"..id
 end
